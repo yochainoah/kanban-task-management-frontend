@@ -1,0 +1,63 @@
+.edit-task-modal {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.edit-task-modal.light {
+  background-color: var(--white);
+}
+.edit-task-modal.dark {
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.edit-task-modal input,
+textarea {
+  font-weight: 500;
+  padding-left: 16px;
+}
+.edit-task-modal {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.edit-task-modal input {
+  height: 40px;
+  border: 1px;
+  border: 1px solid #828fa340;
+  border-radius: 4px;
+  width: 100%;
+}
+.edit-task-modal.light input,textarea{
+  background-color: var(--white);
+}
+.edit-task-modal.light textarea{
+  color: black;
+  background-color: var(--white);
+}
+.edit-task-modal.dark input,textarea {
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.edit-task-modal p {
+  color: var(--grey-medium);
+  margin-bottom: 8px;
+}
+.edit-task-modal .btn-secondry {
+  width: 100%;
+  font-weight: bold;
+}
+.edit-task-modal .btn-primary-s {
+  font-weight: bold;
+}

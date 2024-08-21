@@ -1,0 +1,38 @@
+.board {
+  display: flex;
+  gap: 24px;
+  margin: 23px  0 0 0;
+}
+.column-container {
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.column-container .column-heading{
+  display: flex;
+  gap: 12px;
+}
+.column-container h4{
+  text-transform: uppercase;
+  color: var(--grey-medium);
+}
+.task {
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.114);
+}
+.task.dark {
+  background-color: var(--dark-grey);
+  color: var(--white);
+}
+.task.light {
+  background-color: var(--white);
+}
+.task p{
+  color: var(--grey-medium);
+  font-weight: bold;
+}

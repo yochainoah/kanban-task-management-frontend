@@ -1,0 +1,280 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+  /* width: 100%;
+  height: 100%; */
+}
+
+.task-model-container {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.task-model-container.dark {
+  background-color: var(--dark-grey);
+  color: var(--white);
+}
+.task-model-container.light {
+  background-color: var(--white);
+}
+.task-model-container p {
+  color: var(--grey-medium);
+}
+/* .task-model-container p:nth-child(2) {
+  font-weight: bold;
+} */
+ .task-model-container .task-description{
+  font-weight: 500;
+ }
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  /* border: 5px dashed red; */
+}
+.task-header.light {
+  background-color: var(--white);
+}
+.task-header.dark {
+  background-color: var(--dark-grey);
+}
+.task-header.light button {
+  background-color: var(--white);
+  border: none;
+}
+.task-header.dark button {
+  background-color: var(--dark-grey);
+  border: none;
+}
+.task-header-menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  translate: 0 100%;
+  width: 192px;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--white);
+}
+.task-header-menu button{
+  display: block;
+  height: 47px;
+  width: 100%;
+  text-align: left;
+}
+.task-header-menu.light {
+  background-color: var(--white);
+}
+.task-header-menu.dark {
+  background-color: var(--very-dark-black);
+}
+.task-header-menu.light .edit-t-btn{
+  background-color: var(--white);
+  color: var(--grey-medium);
+}
+.task-header-menu.dark .edit-t-btn{
+  background-color: var(--very-dark-black);
+  color: var(--grey-medium);
+}
+.task-header-menu.light .delete-t-btn{
+  background-color: var(--white);
+  color: var(--red);
+}
+.task-header-menu.dark .delete-t-btn{
+  background-color: var(--very-dark-black);
+  color: var(--red);
+}
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.subtasks-container p {
+  font-weight: bold;
+  margin-bottom: 16px;
+  line-height: normal;
+}
+.subtask-box {
+  padding: 12px;
+  display: flex;
+  gap: 16px;
+  flex-direction: row-reverse;
+  justify-content: start;
+  border-radius: 4px;
+  flex-wrap: wrap;
+  cursor: pointer;
+
+}
+.subtask-box.light:hover {
+  background-color: rgb(99, 95, 199, 0.25);
+}
+.subtask-box.dark:hover {
+  background-color: rgb(99, 95, 199, 0.25);
+}
+.subtask-box.light {
+  background-color: var(--light-grey);
+}
+.subtask-box.dark {
+  background-color: var(--very-dark-black);
+}
+.subtask-label {
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  gap: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 30px;
+}
+.subtask-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  border-radius: 4px;
+  background-color: var(--white);
+  border: 1px solid #828fa340;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.subtask-label:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+/* When the checkbox is checked, add a blue background */
+.subtask-label input:checked ~ .checkmark {
+  background-color: var(--main-purple);
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+
+}
+.subtask-label input:checked ~ .checkmark:after {
+  display: block;
+}
+.subtask-label .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.subtask-label.checked {
+  color: var(--grey-medium);
+  text-decoration: line-through;
+}
+
+/* dd */
+.status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.status-container.light {
+  background-color: var(--white);
+}
+.status-container.dark {
+  background-color: var(--dark-grey);
+}
+.status-container p{
+  font-weight: bold;
+}
+.status-container.light p{
+  color: var(--grey-medium);
+}
+.status-container.dark p{
+  color: var(--white);
+}
+.status-dd {
+  width: 100%;
+  position: relative;
+}
+.dd-btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 5px;
+  border: 1px solid #828fa340;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* box-shadow: 0 2px 9px 0 hsl(0 , 0%, 0%, 5.2%); */
+  text-align: start;
+  padding-left: 24px;
+  padding-right: 18px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.dd-btn.purple{
+  border: 1px solid var(--main-purple);
+}
+.dd-btn.dark {
+  background-color: var(--dark-grey);
+  color: var(--white)
+}
+.dd-btn.light {
+  background-color: var(--white);
+}
+.dd-menu {
+  position: absolute;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+.dd-menu button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  height: 54px;
+  text-align: start;
+  padding-left: 24px;
+  color: var(--grey-medium);
+}
+.dd-menu.light button {
+  background-color: var(--white);
+}
+.dd-menu.dark button {
+  background-color: var(--very-dark-black);
+}
+.dd-menu button:nth-last-child(1) {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.dd-check {
+  display: none;
+}

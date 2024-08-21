@@ -1,0 +1,81 @@
+header.dark {
+  background-color: var(--dark-grey);
+}
+header.light {
+  background-color: var(--white);
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  height: 32px;
+}
+.header-right .btn-primary-l {
+  height: 32px;
+  border: none;
+  background-color: var(--main-purple);
+  border-radius: 24px;
+  color: var(--white);
+  width: 48px;
+}
+/* .task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* border: 5px dashed red; */
+
+.header-right.light {
+  background-color: var(--white);
+}
+.header-right.dark {
+  background-color: var(--dark-grey);
+}
+.header-right.light .brd-options-btn {
+  background-color: var(--white);
+  border: none;
+}
+.header-right.dark .brd-options-btn {
+  background-color: var(--dark-grey);
+  border: none;
+}
+.board-header-menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  translate: 0 100%;
+  width: 192px;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--white);
+}
+.board-header-menu button {
+  display: block;
+  height: 47px;
+  width: 100%;
+  text-align: left;
+  border: none;
+}
+.board-header-menu.light {
+  background-color: var(--white);
+}
+.board-header-menu.dark {
+  background-color: var(--very-dark-black);
+}
+.board-header-menu.light .edit-b-btn {
+  background-color: var(--white);
+  color: var(--grey-medium);
+}
+.board-header-menu.dark .edit-b-btn {
+  background-color: var(--very-dark-black);
+  color: var(--grey-medium);
+}
+.board-header-menu.light .delete-b-btn {
+  background-color: var(--white);
+  color: var(--red);
+}
+.board-header-menu.dark .delete-b-btn {
+  background-color: var(--very-dark-black);
+  color: var(--red);
+}

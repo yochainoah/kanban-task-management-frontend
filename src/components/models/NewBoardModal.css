@@ -1,0 +1,66 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+.add-board-modal {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.add-board-modal.light {
+  background-color: var(--white);
+}
+.add-board-modal.dark {
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.add-board-modal input {
+  height: 40px;
+  border: 1px;
+  border: 1px solid #828fa340;
+  border-radius: 4px;
+  width: 100%;
+}
+.add-board-modal.light input,
+textarea {
+  background-color: var(--white);
+}
+.add-board-modal.light textarea {
+  background-color: var(--white);
+}
+.add-board-modal.dark input,
+textarea {
+  background-color: var(--dark-grey);
+}
+.add-board-modal p{
+  color: var(--grey-medium);
+  margin-bottom: 8px;
+}
+.add-board-modal .btn-secondry {
+  width: 100%;
+  font-weight: bold;
+}
+.add-board-modal .btn-primary-s {
+  font-weight: bold;
+}
+.subtask-input.light button {
+  background-color: var(--white);
+}
+.subtask-input.dark button {
+  background-color: var(--dark-grey);
+}

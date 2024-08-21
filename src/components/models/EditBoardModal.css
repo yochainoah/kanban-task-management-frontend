@@ -1,0 +1,71 @@
+.edit-board-modal {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.edit-board-modal.light {
+  background-color: var(--white);
+}
+.edit-board-modal.dark {
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.edit-board-modal.light input,textarea{
+  background-color: var(--white);
+}
+.edit-board-modal.light textarea{
+  color: black;
+  background-color: var(--white);
+}
+.edit-board-modal.dark input,textarea {
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.edit-board-modal input {
+  height: 40px;
+  border: 1px;
+  border: 1px solid #828fa340;
+  border-radius: 4px;
+  width: 100%;
+}
+.edit-board-modal p{
+  color: var(--grey-medium);
+  margin-bottom: 8px;
+}
+.column-input {
+  width: 100%;
+  display: flex;
+}
+.column-input.light {
+  background-color: var(--white);
+}
+.column-input.dark {
+  background-color: var(--dark-grey);
+}
+.column-input button {
+  border: none;
+  margin-left: 16px;
+}
+.column-input.light button {
+  background-color: var(--white);
+}
+.column-input.dark button {
+  background-color: var(--dark-grey);
+}
+.column-input #st-input-box {
+  width: 100%;
+  height: 40px;
+}
+.edit-board-modal .btn-secondry {
+  width: 100%;
+  font-weight: bold;
+}
+.edit-board-modal .btn-primary-s {
+  font-weight: bold;
+}

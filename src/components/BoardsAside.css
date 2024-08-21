@@ -1,0 +1,70 @@
+.board-options-aside {
+  display: none;
+  width: 260px;
+  /* display: flex; */
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 3;
+}
+.board-options-aside.light {
+  background-color: var(--white);
+}
+.board-options-aside.dark {
+  background-color: var(--dark-grey);
+}
+.board-options-aside a{
+  text-decoration: none;
+}
+.board-options-aside button{
+  border: none;
+  width:100%;
+  height: 48px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap:12px;
+  color: var(--grey-medium);
+  padding-left: 24px;
+
+}
+.board-options-aside button.light{
+  background-color: var(--white);
+}
+.board-options-aside button.dark{
+  background-color: var(--dark-grey);
+}
+.board-options-aside h4{
+  color:var(--grey-medium);
+  padding-left: 24px;
+  height: 48px;
+  display: flex;
+  align-items: center; 
+}
+.board-options-aside button.selected {
+  background-color: var(--main-purple);
+  color: var(--white);
+  width: 240px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.board-options-aside button.add-board-btn{
+  color: var(--main-purple);
+}
+.board-options-aside button.add-board-btn.light{
+  color: var(--main-purple);
+  background-color: var(--white);
+}
+.board-options-aside button.add-board-btn.dark{
+  color: var(--main-purple);
+  background-color: var(--dark-grey);
+}
+
+@media screen and (min-width:768px) {
+  .board-options-aside {
+    display: flex;
+  }
+
+}

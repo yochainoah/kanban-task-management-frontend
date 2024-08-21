@@ -1,0 +1,84 @@
+.board-btn.dark{
+  color: var(--white);
+  background-color: var(--dark-grey);
+}
+.board-btn.light{
+  background-color: var(--white);
+}
+.board-options a{
+  text-decoration: none;
+}
+.board-options button.selected {
+  background-color: var(--main-purple);
+  color: var(--white);
+  width: 240px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.board-options button.add-board-btn{
+  color: var(--main-purple);
+}
+.board-options button.add-board-btn.light{
+  color: var(--main-purple);
+  background-color: var(--white);
+}
+.board-options button.add-board-btn.dark{
+  color: var(--main-purple);
+  background-color: var(--dark-grey);
+}
+.toggle-div{
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.toggleContainer {
+  width: 235px;
+  height: 48px;
+
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.toggleContainer.light {
+  background-color: var(--light-grey);
+}
+.toggleContainer.dark {
+  background-color: var(--very-dark-black);
+}
+
+/* Hide default HTML checkbox */
+.toggleContainer input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  border-radius: 25px;
+  background-color: var(--main-purple);
+  transition: backround .3s;
+  outline: none;
+  cursor: pointer;
+}
+.toggleContainer input::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  background-color: var(--white);
+  transition: left .3s;
+}
+
+.toggleContainer input:checked {
+  background-color: var(--main-purple);
+}
+
+.toggleContainer input:checked::after {
+  left: 75%;
+}

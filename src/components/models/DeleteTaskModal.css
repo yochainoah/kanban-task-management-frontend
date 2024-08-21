@@ -1,0 +1,40 @@
+.delete-task-modal{
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+}
+.delete-task-modal.light{
+  background-color: var(--white);
+}
+.delete-task-modal.dark{
+  background-color: var(--dark-grey);
+}
+.delete-task-modal h2{
+  color: var(--red);
+}
+.delete-task-modal .dt-warning{
+  font-weight: 500;
+  color: var(--grey-medium);
+}
+.delete-task-modal p{
+  font-size: 13px;
+  font-weight: bold;
+}
+.dt-btns-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.btn-destructive {
+  width: 100%;
+}
+.btn-secondry{
+  width: 100%;
+} 
