@@ -47,6 +47,7 @@ function App() {
             onClick={() => setShowAddTask(!showAddTask)}
             className="btn-primary-l"
           >
+            <h4>Add New Task</h4>
             <img src="/assets/icon-add-task-mobile.svg" />
           </button>
           {/* ellipsis */}
@@ -70,7 +71,7 @@ function App() {
         </div>
       </header>
       <main>
-        <BoardsAside />
+        <BoardsAside openAddBoard={() => setShowAddBoard(true)}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/boards/details/:id" element={<ShowBoard />} />

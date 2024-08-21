@@ -17,7 +17,19 @@ header.light {
   background-color: var(--main-purple);
   border-radius: 24px;
   color: var(--white);
-  width: 48px;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 16px; 
+  align-items: center;
+}
+.header-right .btn-primary-l h4{
+  white-space: nowrap;
+  letter-spacing: normal;
+}
+.header-right .btn-primary-l img {
+  padding: 3px 3px 3px 3px;
+  width: 12px; /* Adjust to the original size of your SVG */
+  height: 12px; /* Adjust to the original size of your SVG */
 }
 /* .task-header {
   display: flex;
