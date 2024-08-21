@@ -10,7 +10,7 @@ function DeleteTaskModal({ open, onClose, taskDeleted }) {
   };
   // console.log("task deleted:",taskDeleted)
   const handleDeleteTask = () => {
-    axios.delete(`http://localhost:5000/tasks`, {
+    axios.delete(`https://kanban-task-management-backend-blue.vercel.app/tasks`, {
       data: {
         boardId: boardClicked._id,
         task: taskDeleted,

@@ -48,7 +48,7 @@ function EditBoardModal({ open, onClose }) {
   }
   async function handleEditBoardSubmit(){
     console.log("board edited:",boardEdited)
-    const res = await axios.put(`http://localhost:5000/boards/${boardClicked._id}`, boardEdited);
+    const res = await axios.put(`https://kanban-task-management-backend-blue.vercel.app/boards/${boardClicked._id}`, boardEdited);
     const newBoard = res.data;
     setBoardClicked(newBoard);
     onClose();

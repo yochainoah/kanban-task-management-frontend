@@ -40,7 +40,7 @@ const ShowBoard = () => {
   };
   useEffect(() => {
     async function fetchBoard() {
-      const boardData = await axios.get(`http://localhost:5000/boards/${id}`);
+      const boardData = await axios.get(`https://kanban-task-management-backend-blue.vercel.app/boards/${id}`);
       // console.log(boardData.data)
       setBoardClicked({ ...boardData.data });
     }

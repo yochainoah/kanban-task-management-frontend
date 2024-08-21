@@ -64,7 +64,7 @@ const NewTaskModel = ({ open, onClose }) => {
   const handleTaskSubmit = async () => {
     console.log("task-added:", taskAdded);
     taskAdded.boardId = boardClicked._id;
-    const res = await fetch("http://localhost:5000/addTask", {
+    const res = await fetch("https://kanban-task-management-backend-blue.vercel.app/addTask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

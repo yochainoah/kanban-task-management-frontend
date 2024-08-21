@@ -57,7 +57,7 @@ function NewBoardModal({ open, onClose }) {
   }
   async function handleBoardSubmit(){
     console.log("board added:",boardAdded)
-    const res = await axios.post('http://localhost:5000/addBoard', boardAdded);
+    const res = await axios.post('https://kanban-task-management-backend-blue.vercel.app/addBoard', boardAdded);
     const newBoard = res.data;
     setBoardsState((prevState) => {
       const newBoards = {...prevState};

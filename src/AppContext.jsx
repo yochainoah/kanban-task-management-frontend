@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const boardsData = await axios.get(`http://localhost:5000/boards`);
+      const boardsData = await axios.get(`https://kanban-task-management-backend-blue.vercel.app/boards`);
       setBoardsState({
         boards: boardsData.data,
         boardSelected: boardsData.data[0].name,

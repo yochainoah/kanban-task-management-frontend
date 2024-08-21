@@ -72,7 +72,7 @@ function EditTaskModal({ open, onClose }) {
     };
     // console.log("taskClicked  :", taskClicked);
     let taskData = await axios.put(
-      `http://localhost:5000/tasks/${taskClicked._id}`,
+      `https://kanban-task-management-backend-blue.vercel.app/tasks/${taskClicked._id}`,
       data
     );
     let newTask = taskData.data;

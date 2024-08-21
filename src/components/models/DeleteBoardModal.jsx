@@ -9,7 +9,7 @@ function DeleteBoardModal({ open, onClose }) {
     onClose();
   };
   const handleDeleteBoard = async () => {
-    await axios.delete(`http://localhost:5000/boards/${boardClicked._id}`);
+    await axios.delete(`https://kanban-task-management-backend-blue.vercel.app/boards/${boardClicked._id}`);
       setBoardsState((prevBoards) => {
         const newBoards = {...prevBoards}
         const deletedIndex = newBoards.boards.findIndex(b => b._id === boardClicked._id);
