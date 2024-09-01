@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import "./NewTaskModel.css";
 import { useAppContext } from "../../AppContext";
+// import dotenv from "dotenv";
+// dotenv.config();
 const NewTaskModel = ({ open, onClose }) => {
   const { theme, boardClicked, setBoardClicked, boardsState } = useAppContext();
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const [warning, setWarning] = useState({
+    warningStatus: false,
+    warningId: "",
+  });
   const [taskAdded, setTaskAdded] = useState({
     title: "",
     description: "",
@@ -18,7 +24,13 @@ const NewTaskModel = ({ open, onClose }) => {
   ]);
 
   const handleCloseAddTask = () => {
-    // setShowDropdown(false); // Close the dropdown
+    setShowStatusDropdown(false); // Close the dropdown
+    setWarning((prevState) => {
+      const newState = {...prevState}
+      newState.warningStatus = true;
+      newState.warningId = "";
+      return newState;
+    })
     onClose(); // Call the onClose function to close the modal
   };
   const handleTaskTitle = (titleAdded) => {
@@ -32,10 +44,20 @@ const NewTaskModel = ({ open, onClose }) => {
     setShowStatusDropdown(!showStatusDropdown);
   };
   const handleRemoveSubtask = (id) => {
-    setSubtasks((prevSubtasks) =>
-      prevSubtasks.filter((subtask) => subtask.id !== id)
-    );
-    setTaskAdded({ ...taskAdded, subtasks: subtasks });
+    const taskToBeDeleted = subtasks.find((el) => el.id === id);
+    if (!taskToBeDeleted.title && subtasks.length <= 2) {
+      setWarning((prevState) => {
+        const newState = { ...prevState };
+        newState.warningId = taskToBeDeleted.id;
+        newState.warningStatus = true;
+        return newState;
+      });
+    } else {
+      setSubtasks((prevSubtasks) =>
+        prevSubtasks.filter((subtask) => subtask.id !== id)
+      );
+      setTaskAdded({ ...taskAdded, subtasks: subtasks });
+    }
   };
 
   const handleAddSubtask = () => {
@@ -64,7 +86,7 @@ const NewTaskModel = ({ open, onClose }) => {
   const handleTaskSubmit = async () => {
     console.log("task-added:", taskAdded);
     taskAdded.boardId = boardClicked._id;
-    const res = await fetch("https://kanban-task-management-backend-blue.vercel.app/addTask", {
+    const res = await fetch(`${import.meta.env.VITE_API_ROOT}/addTask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,26 +140,49 @@ const NewTaskModel = ({ open, onClose }) => {
         </div>
         <div className={`input-st-container`}>
           <p className="bold">Subtasks</p>
-          {subtasks.map((subtask) => {
-            return (
-              <div key={subtask.id} className={`subtask-input ${theme}`}>
-                <input
-                  type="text"
-                  id="st-input-box"
-                  value={subtask.title}
-                  onInput={(e) =>
-                    handleSubtaskChange(subtask.id, e.target.value)
+          <div className="subtasks-container">
+            {subtasks.map((subtask) => {
+              let warningIndicator =
+                warning.warningStatus && warning.warningId === subtask.id;
+              return (
+                <div
+                  key={subtask.id}
+                  className={
+                    warning.warningStatus && warning.warningId === subtask.id
+                      ? `subtask-input ${theme} red`
+                      : `subtask-input ${theme}`
                   }
-                />
-                <button onClick={() => handleRemoveSubtask(subtask.id)}>
-                  <img src="/assets/icon-cross.svg" alt="delete cross" />
-                </button>
-              </div>
-            );
-          })}
-          <button onClick={handleAddSubtask} className={`btn-secondry ${theme}`}>
-            + Add New Subtask
-          </button>
+                >
+                  <input
+                    type="text"
+                    className={`st-input-box`}
+                    value={subtask.title}
+                    placeholder={warning.warningStatus && warning.warningId === subtask.id ? "Can't be empty" : ""}
+                    onInput={(e) =>
+                      handleSubtaskChange(subtask.id, e.target.value)
+                    }
+                  />
+                  <button onClick={() => handleRemoveSubtask(subtask.id)}>
+                    {warningIndicator && (
+                      <img
+                        src="/assets/icon-cross-red.svg"
+                        alt="delete cross"
+                      />
+                    )}
+                    {!warningIndicator && (
+                      <img src="/assets/icon-cross.svg" alt="delete cross" />
+                    )}
+                  </button>
+                </div>
+              );
+            })}
+            <button
+              onClick={handleAddSubtask}
+              className={`btn-secondry ${theme}`}
+            >
+              + Add New Subtask
+            </button>
+          </div>
         </div>
         {/* dd-status */}
         <div className="input-status-container">
@@ -145,7 +190,11 @@ const NewTaskModel = ({ open, onClose }) => {
           <div className="status-dd">
             <button
               onClick={handelStatusDropdown}
-              className={`dd-btn ${theme}`}
+              className={
+                showStatusDropdown
+                  ? `dd-btn ${theme} purple`
+                  : `dd-btn ${theme}`
+              }
             >
               {taskAdded.status}
               <img
@@ -154,7 +203,7 @@ const NewTaskModel = ({ open, onClose }) => {
               />
             </button>
             <div
-              className={`dd-menu`}
+              className={`dd-menu ${theme}`}
               style={{ display: showStatusDropdown ? `block` : `none` }}
             >
               {boardClicked.statuses.map((status) => {

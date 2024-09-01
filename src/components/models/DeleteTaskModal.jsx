@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useAppContext } from "../../AppContext";
 import "./DeleteTaskModal.css";
+// import dotenv from "dotenv";
+// dotenv.config();
+
 function DeleteTaskModal({ open, onClose, taskDeleted }) {
   const { boardClicked, setBoardClicked, taskClicked, setShowModal, theme } =
     useAppContext();
@@ -10,7 +13,7 @@ function DeleteTaskModal({ open, onClose, taskDeleted }) {
   };
   // console.log("task deleted:",taskDeleted)
   const handleDeleteTask = () => {
-    axios.delete(`https://kanban-task-management-backend-blue.vercel.app/tasks`, {
+    axios.delete(`${import.meta.env.VITE_API_ROOT}/tasks`, {
       data: {
         boardId: boardClicked._id,
         task: taskDeleted,

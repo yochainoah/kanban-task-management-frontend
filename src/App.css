@@ -4,6 +4,25 @@ header.dark {
 header.light {
   background-color: var(--white);
 }
+.header-mobile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-desktop{
+  display: none;
+}
+.header-desktop h1.light {
+  background-color:var(--white) ;
+  color: black;
+}
+.header-desktop h1.dark {
+  background-color: var(--dark-grey);
+  color: var(--white);
+}
+.header-desktop h4{
+  font-size: 20px;
+}
 .header-right {
   display: flex;
   align-items: center;
@@ -25,9 +44,9 @@ header.light {
 .header-right .btn-primary-l h4{
   white-space: nowrap;
   letter-spacing: normal;
+  display: none;
 }
 .header-right .btn-primary-l img {
-  padding: 3px 3px 3px 3px;
   width: 12px; /* Adjust to the original size of your SVG */
   height: 12px; /* Adjust to the original size of your SVG */
 }
@@ -90,4 +109,41 @@ header.light {
 .board-header-menu.dark .delete-b-btn {
   background-color: var(--very-dark-black);
   color: var(--red);
+}
+.show-asidebar-btn{
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 32px;
+  height: 48px;
+  width: 56px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  background-color: var(--main-purple);
+  border: none;
+  cursor: pointer;
+}
+.show-asidebar-btn:hover{
+  background-color: var(--main-purple-hover);
+}
+@media screen and (min-width:768px) {
+  .header-right .btn-primary-l h4{
+    display: block;
+  }
+  .header-right .btn-primary-l img {
+    display: none;
+  }
+  .header-left{
+    padding-left: 260px;
+  }
+  .header-mobile{
+    display: none;
+  }
+  .header-desktop{
+    display: block;
+    font-size: 20px;
+  }
+  .show-asidebar-btn {
+    display: block;
+  }
 }

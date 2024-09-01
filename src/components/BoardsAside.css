@@ -1,13 +1,19 @@
 .board-options-aside {
   display: none;
   width: 260px;
-  /* display: flex; */
-
   height: 100vh;
   position: fixed;
   top:0;
   left: 0;
   z-index: 3;
+  padding-bottom: 32px;
+  transition: transform 0.3s ease;
+}
+.board-options-aside.show-sidebar {
+  transform: translateX(0);
+}
+.board-options-aside.hide-sidebar {
+  transform: translateX(-100%);
 }
 .logo-container {
   height: 80px;
@@ -17,7 +23,6 @@
 }
 .logo-container .logo-aside{
   padding-left: 24px;
-  /* height: 100%; */
 }
 .board-options-aside.light {
   background-color: var(--white);
@@ -38,7 +43,7 @@
   gap:12px;
   color: var(--grey-medium);
   padding-left: 24px;
-
+  flex-shrink: 0;
 }
 .board-options-aside button.light{
   background-color: var(--white);
@@ -75,8 +80,40 @@
 .aside-bottom{
   height: 80px;
   display: flex;
-  align-items: center;
-  justify-content: center
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  gap: 12px;
+}
+.aside-bottom .hide-asidebar-btn{
+  width: 240px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  cursor: pointer;
+}
+
+.aside-bottom .hide-asidebar-btn.light{
+  color: var(--grey-medium);
+  background-color: var(--white);
+}
+.aside-bottom .hide-asidebar-btn.light:hover{
+  color: var(--main-purple);
+  background-color: rgb(99,95,199,0.1);
+}
+.aside-bottom .hide-asidebar-btn.dark{
+  color: var(--grey-medium);
+  background-color: var(--dark-grey);
+}
+.aside-bottom .hide-asidebar-btn.dark:hover{
+  color: var(--main-purple);
+  background-color: var(--white);
+}
+.aside-bottom .hide-asidebar-btn:hover svg path{
+  fill: var(--main-purple);
+}
+.toggleContainer{
+  margin-left: auto;
+  margin-right: auto;
 }
 @media screen and (min-width:768px) {
   .board-options-aside {

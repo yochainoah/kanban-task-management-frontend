@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import TaskModel from "./models/TaskModel";
 
 import { useAppContext } from "../AppContext";
 import "./ShowBoard.css";
-
+// import dotenv from "dotenv";
+// dotenv.config();
 /*
     1. component mounts, JSX renders
     2. useEffect is called
@@ -18,13 +19,8 @@ function handleSelectBoard(btnvalue) {
 }
 const ShowBoard = () => {
   // const [showTaskModal, setShowTaskModal] = useState(false);
-  const {
-    theme,
-    showModal,
-    setShowModal,
-    taskClicked,
-    setTaskClicked,
-  } = useAppContext();
+  const { theme, showModal, setShowModal, taskClicked, setTaskClicked } =
+    useAppContext();
   const { id } = useParams();
   // const [board, setBoard] = useState({});
   const { boardClicked, setBoardClicked, fetchBoard } = useAppContext();
@@ -40,7 +36,9 @@ const ShowBoard = () => {
   };
   useEffect(() => {
     async function fetchBoard() {
-      const boardData = await axios.get(`https://kanban-task-management-backend-blue.vercel.app/boards/${id}`);
+      const boardData = await axios.get(
+        `${import.meta.env.VITE_API_ROOT}/boards/${id}`
+      );
       // console.log(boardData.data)
       setBoardClicked({ ...boardData.data });
     }

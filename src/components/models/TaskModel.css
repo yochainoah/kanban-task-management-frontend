@@ -37,9 +37,9 @@
 /* .task-model-container p:nth-child(2) {
   font-weight: bold;
 } */
- .task-model-container .task-description{
+.task-model-container .task-description {
   font-weight: 500;
- }
+}
 .task-header {
   display: flex;
   align-items: center;
@@ -71,7 +71,7 @@
   padding: 16px;
   background-color: var(--white);
 }
-.task-header-menu button{
+.task-header-menu button {
   display: block;
   height: 47px;
   width: 100%;
@@ -83,19 +83,19 @@
 .task-header-menu.dark {
   background-color: var(--very-dark-black);
 }
-.task-header-menu.light .edit-t-btn{
+.task-header-menu.light .edit-t-btn {
   background-color: var(--white);
   color: var(--grey-medium);
 }
-.task-header-menu.dark .edit-t-btn{
+.task-header-menu.dark .edit-t-btn {
   background-color: var(--very-dark-black);
   color: var(--grey-medium);
 }
-.task-header-menu.light .delete-t-btn{
+.task-header-menu.light .delete-t-btn {
   background-color: var(--white);
   color: var(--red);
 }
-.task-header-menu.dark .delete-t-btn{
+.task-header-menu.dark .delete-t-btn {
   background-color: var(--very-dark-black);
   color: var(--red);
 }
@@ -118,7 +118,6 @@
   border-radius: 4px;
   flex-wrap: wrap;
   cursor: pointer;
-
 }
 .subtask-box.light:hover {
   background-color: rgb(99, 95, 199, 0.25);
@@ -178,7 +177,6 @@
   content: "";
   position: absolute;
   display: none;
-
 }
 .subtask-label input:checked ~ .checkmark:after {
   display: block;
@@ -211,13 +209,13 @@
 .status-container.dark {
   background-color: var(--dark-grey);
 }
-.status-container p{
+.status-container p {
   font-weight: bold;
 }
-.status-container.light p{
+.status-container.light p {
   color: var(--grey-medium);
 }
-.status-container.dark p{
+.status-container.dark p {
   color: var(--white);
 }
 .status-dd {
@@ -239,12 +237,12 @@
   margin-bottom: 4px;
   cursor: pointer;
 }
-.dd-btn.purple{
-  border: 1px solid var(--main-purple);
+.dd-btn.purple {
+  border: 2px solid var(--main-purple);
 }
 .dd-btn.dark {
   background-color: var(--dark-grey);
-  color: var(--white)
+  color: var(--white);
 }
 .dd-btn.light {
   background-color: var(--white);

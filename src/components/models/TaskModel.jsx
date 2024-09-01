@@ -5,6 +5,9 @@ import axios from "axios";
 import "./TaskModel.css";
 import EditTaskModal from "./EditTaskModal";
 import DeleteTaskModal from "./DeleteTaskModal";
+// import dotenv from "dotenv";
+// dotenv.config()g();
+
 const TaskModel = ({ open, onClose, task }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showBtns, setShowBtns] = useState(false);
@@ -35,7 +38,7 @@ const TaskModel = ({ open, onClose, task }) => {
       description: task.description,
       boardId: boardClicked._id,
     };
-    await axios.put(`https://kanban-task-management-backend-blue.vercel.app/tasks/${task._id}`, data);
+    await axios.put(`${import.meta.env.VITE_API_ROOT}/tasks/${task._id}`, data);
 
     setFetchBoard(!fetchBoard);
     console.log("boardState:", board);
@@ -54,7 +57,10 @@ const TaskModel = ({ open, onClose, task }) => {
     };
     console.log(updatedTask);
     try {
-      await axios.put(`https://kanban-task-management-backend-blue.vercel.app/tasks/${task._id}`, updatedTask);
+      await axios.put(
+        `${import.meta.env.VITE_API_ROOT}/tasks/${task._id}`,
+        updatedTask
+      );
       setFetchBoard(!fetchBoard);
       // setTaskClicked(updatedTask)
       setShowDropdown(false); // Close the dropdown

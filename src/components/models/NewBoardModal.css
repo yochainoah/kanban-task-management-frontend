@@ -35,21 +35,32 @@
   border: 1px solid #828fa340;
   border-radius: 4px;
   width: 100%;
+  outline: none;
+}
+.add-board-modal input:focus {
+  border: 2px solid var(--main-purple);
 }
 .add-board-modal.light input,
 textarea {
   background-color: var(--white);
+
 }
-.add-board-modal.light textarea {
+.add-board-modal.light {
   background-color: var(--white);
+
 }
-.add-board-modal.dark input,
-textarea {
+.add-board-modal.dark input {
   background-color: var(--dark-grey);
+  color: var(--white);
 }
 .add-board-modal p{
-  color: var(--grey-medium);
   margin-bottom: 8px;
+}
+.add-board-modal.dark p {
+  color: var(--white);
+}
+.add-board-modal.light p {
+  color: var(--grey-medium);
 }
 .add-board-modal .btn-secondry {
   width: 100%;
@@ -57,6 +68,15 @@ textarea {
 }
 .add-board-modal .btn-primary-s {
   font-weight: bold;
+}
+.input-column-container{
+  display: flex;
+  flex-direction: column;
+}
+.column-inputs-div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .subtask-input.light button {
   background-color: var(--white);

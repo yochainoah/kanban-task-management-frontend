@@ -1,27 +1,28 @@
 import React from "react";
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useAppContext } from "../../AppContext";
 import "./NewBoardModal.css";
-
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const initialColumns = [
   {
     name: "",
-    tasks: []
+    tasks: [],
   },
   {
     name: "",
-    tasks: []
-  }
-]
+    tasks: [],
+  },
+];
 
 function NewBoardModal({ open, onClose }) {
   const [boardAdded, setBoardAdded] = useState({
     name: "",
-    columns: initialColumns
+    columns: initialColumns,
   });
-  const { setBoardsState, theme} = useAppContext();
+  const { setBoardsState, theme } = useAppContext();
   function handleCloseAddBoard() {
     onClose();
   }
@@ -31,39 +32,42 @@ function NewBoardModal({ open, onClose }) {
   const addBoardData = (key, value) => {
     setBoardAdded({
       ...boardAdded,
-      [key]: value
-    })
-  }
+      [key]: value,
+    });
+  };
   function handleColumnChange(columnIndex, columnName) {
     setBoardAdded((prevState) => {
-      const newBoard = {...prevState}
+      const newBoard = { ...prevState };
       newBoard.columns[columnIndex].name = columnName;
-      return newBoard
-    })
-  }
-  function handleRemoveColumn(columnIndex){
-    setBoardAdded((prevState) => {
-      const newBoard = {...prevState}
-      newBoard.columns.splice(columnIndex,1);
       return newBoard;
-    })
+    });
   }
-  function handleAddColumn(){
+  function handleRemoveColumn(columnIndex) {
     setBoardAdded((prevState) => {
-      const newBoard = {...prevState}
-      newBoard.columns.push({name: "", tasks: []});
-      return newBoard
-    })
+      const newBoard = { ...prevState };
+      newBoard.columns.splice(columnIndex, 1);
+      return newBoard;
+    });
   }
-  async function handleBoardSubmit(){
-    console.log("board added:",boardAdded)
-    const res = await axios.post('https://kanban-task-management-backend-blue.vercel.app/addBoard', boardAdded);
+  function handleAddColumn() {
+    setBoardAdded((prevState) => {
+      const newBoard = { ...prevState };
+      newBoard.columns.push({ name: "", tasks: [] });
+      return newBoard;
+    });
+  }
+  async function handleBoardSubmit() {
+    console.log("board added:", boardAdded);
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_ROOT}/addBoard`,
+      boardAdded
+    );
     const newBoard = res.data;
     setBoardsState((prevState) => {
-      const newBoards = {...prevState};
+      const newBoards = { ...prevState };
       newBoards.boards.push(newBoard);
       return newBoards;
-    })
+    });
     onClose();
   }
   // addBoardData("name", "doug")
@@ -73,7 +77,7 @@ function NewBoardModal({ open, onClose }) {
       name: "doug"
     }
   */
-  if (!open) return null; 
+  if (!open) return null;
   return (
     <div onClick={handleCloseAddBoard} className="overlay">
       <div
@@ -90,31 +94,41 @@ function NewBoardModal({ open, onClose }) {
           <input
             type="text"
             id="task-title"
-            onInput={(e) => addBoardData("name",e.target.value)}
+            onInput={(e) => addBoardData("name", e.target.value)}
           />
         </div>
-        <div className="input-st-container">
+        <div className="input-column-container">
           <p className="bold">Board Columns</p>
-          {boardAdded.columns.map((c,index) => {
-            return (
-              <div key={`${c.name} ${index}`} className={`subtask-input ${theme}`}>
-                <input
-                  type="text"
-                  id="st-input-box"
-                  value={c.name}
-                  onInput={(e) =>
-                    handleColumnChange(index, e.target.value)
-                  }
-                />
-                <button onClick={() => handleRemoveColumn(index)}>
-                  <img src="/assets/icon-cross.svg" alt="delete cross" />
-                </button>
-              </div>
-            );
-          })}
-          <button className={`btn-secondry ${theme}`} onClick={handleAddColumn}>+ Add New Column</button>
+          <div className="column-inputs-div">
+            {boardAdded.columns.map((c, index) => {
+              return (
+                <div
+                  key={`${c.name} ${index}`}
+                  className={`subtask-input ${theme}`}
+                >
+                  <input
+                    type="text"
+                    id="st-input-box"
+                    value={c.name}
+                    onInput={(e) => handleColumnChange(index, e.target.value)}
+                  />
+                  <button onClick={() => handleRemoveColumn(index)}>
+                    <img src="/assets/icon-cross.svg" alt="delete cross" />
+                  </button>
+                </div>
+              );
+            })}
+            <button
+              className={`btn-secondry ${theme}`}
+              onClick={handleAddColumn}
+            >
+              + Add New Column
+            </button>
+          </div>
         </div>
-        <button className="btn-primary-s" onClick={handleBoardSubmit}>Create New Board</button>
+        <button className="btn-primary-s" onClick={handleBoardSubmit}>
+          Create New Board
+        </button>
       </div>
     </div>
   );

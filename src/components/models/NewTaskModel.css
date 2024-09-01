@@ -10,8 +10,6 @@
   align-items: center;
   z-index: 1000;
   padding: 16px;
-  /* width: 100%;
-  height: 100%; */
 }
 .add-task-model {
   max-width: 500px;
@@ -33,25 +31,46 @@
 }
 .add-task-model input {
   height: 40px;
-  border: 1px;
   border: 1px solid #828fa340;
   border-radius: 4px;
   width: 100%;
+  outline: none;
+  cursor: pointer;
+}
+.add-task-model textarea {
+  outline: none;
+  height: 112px;
+  width: 100%;
+  border: 1px solid #828fa340;
+  border-radius: 4px;
+}
+.add-task-model textarea:focus {
+  border: 2px solid var(--main-purple);
+}
+.add-task-model input:focus {
+  border: 2px solid var(--main-purple);
 }
 .add-task-model.light input,
 textarea {
   background-color: var(--white);
 }
 .add-task-model.light textarea {
+  color: black;
   background-color: var(--white);
 }
 .add-task-model.dark input,
 textarea {
+  color: var(--white);
   background-color: var(--dark-grey);
 }
 .add-task-model p {
-  color: var(--grey-medium);
   margin-bottom: 8px;
+}
+.add-task-model.dark p {
+  color: var(--white);
+}
+.add-task-model.light p {
+  color: var(--grey-medium);
 }
 .add-task-model .btn-secondry {
   width: 100%;
@@ -60,7 +79,10 @@ textarea {
 .add-task-model .btn-primary-s {
   font-weight: bold;
 }
-.input-st-container {
+.input-st-container p {
+  margin-bottom: 8px;
+}
+.subtasks-container {
   display: flex;
   flex-direction: column;
   row-gap: 12px;
@@ -68,6 +90,16 @@ textarea {
 .subtask-input {
   width: 100%;
   display: flex;
+}
+.subtask-input.red input {
+  border: 2px solid var(--red);
+  padding-right: 16px;
+}
+.subtask-input.red input::placeholder {
+  color: var(--red);
+  opacity: 1;
+  text-align: right;
+  
 }
 .subtask-input.light {
   background-color: var(--white);
@@ -78,6 +110,7 @@ textarea {
 .subtask-input button {
   border: none;
   margin-left: 16px;
+  cursor: pointer;
 }
 .subtask-input.light button {
   background-color: var(--white);
@@ -85,20 +118,18 @@ textarea {
 .subtask-input.dark button {
   background-color: var(--dark-grey);
 }
-.subtask-input #st-input-box {
+.subtask-input .st-input-box {
   width: 100%;
   height: 40px;
 }
 .btn-secondry.light {
   background-color: rgba(98, 95, 199, 0.1);
+  cursor: pointer;
 }
 .btn-secondry.dark {
   background-color: var(--white);
+  cursor: pointer;
 }
-
-#task-description {
-  height: 112px;
-  width: 100%;
-  border: 1px solid #828fa340;
-  border-radius: 4px;
+.btn-secondry:hover.dark {
+  background-color: var(--white);
 }

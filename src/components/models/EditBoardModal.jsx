@@ -1,8 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../AppContext";
 import "./EditBoardModal.css";
+// import dotenv from "dotenv";
+// dotenv.config();
+
 function EditBoardModal({ open, onClose }) {
   const { theme, setBoardsState, boardClicked, setBoardClicked } =
     useAppContext();
@@ -15,7 +18,7 @@ function EditBoardModal({ open, onClose }) {
     if (boardClicked) {
       setBoardEdited({
         name: boardClicked.name,
-        columns: boardClicked.columns ? [...boardClicked.columns] : []
+        columns: boardClicked.columns ? [...boardClicked.columns] : [],
       });
     }
   }, [boardClicked]);
@@ -46,9 +49,12 @@ function EditBoardModal({ open, onClose }) {
       return newBoard;
     });
   }
-  async function handleEditBoardSubmit(){
-    console.log("board edited:",boardEdited)
-    const res = await axios.put(`https://kanban-task-management-backend-blue.vercel.app/boards/${boardClicked._id}`, boardEdited);
+  async function handleEditBoardSubmit() {
+    console.log("board edited:", boardEdited);
+    const res = await axios.put(
+      `${import.meta.env.VITE_API_ROOT}/boards/${boardClicked._id}`,
+      boardEdited
+    );
     const newBoard = res.data;
     setBoardClicked(newBoard);
     onClose();
@@ -95,7 +101,9 @@ function EditBoardModal({ open, onClose }) {
             + Add New Column
           </button>
         </div>
-        <button className="btn-primary-s" onClick={handleEditBoardSubmit}>Save Changes</button>
+        <button className="btn-primary-s" onClick={handleEditBoardSubmit}>
+          Save Changes
+        </button>
       </div>
     </div>
   );

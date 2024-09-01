@@ -2,10 +2,12 @@ import React from "react";
 import { useAppContext } from "../../AppContext";
 import { useState } from "react";
 import axios from "axios";
-import './EditTaskModal.css'
+import "./EditTaskModal.css";
+// import dotenv from "dotenv";
+// dotenv.config();
+
 function EditTaskModal({ open, onClose }) {
-  const { theme, boardClicked, setBoardClicked, taskClicked } =
-    useAppContext();
+  const { theme, boardClicked, setBoardClicked, taskClicked } = useAppContext();
 
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [taskEdited, setTaskEdited] = useState({
@@ -44,7 +46,10 @@ function EditTaskModal({ open, onClose }) {
     setTaskEdited((prevState) => {
       return {
         ...prevState,
-        subtasks: [...prevState.subtasks, { id: Date.now(), title: "" }],
+        subtasks: [
+          ...prevState.subtasks,
+          { title: "", isCompleted: false, id: Date.now() },
+        ],
       };
     });
   };
@@ -70,9 +75,10 @@ function EditTaskModal({ open, onClose }) {
       ...taskEdited,
       boardId: boardClicked._id,
     };
+    console.log("taskedite", data);
     // console.log("taskClicked  :", taskClicked);
     let taskData = await axios.put(
-      `https://kanban-task-management-backend-blue.vercel.app/tasks/${taskClicked._id}`,
+      `${import.meta.env.VITE_API_ROOT}/tasks/${taskClicked._id}`,
       data
     );
     let newTask = taskData.data;
@@ -81,14 +87,18 @@ function EditTaskModal({ open, onClose }) {
       let newBoard = { ...currentBoard };
 
       // splice old column
-      let oldColumn = newBoard.columns.find((c) => c.name === taskClicked.status);
-      let oldTaskIndex = oldColumn.tasks.findIndex((t) => t._id === newTask._id);
-      oldColumn.tasks.splice(oldTaskIndex,1);
+      let oldColumn = newBoard.columns.find(
+        (c) => c.name === taskClicked.status
+      );
+      let oldTaskIndex = oldColumn.tasks.findIndex(
+        (t) => t._id === newTask._id
+      );
+      oldColumn.tasks.splice(oldTaskIndex, 1);
 
       // push to new column
       let column = newBoard.columns.find((c) => c.name === newTask.status);
       column.tasks.push(newTask);
-      
+
       return newBoard;
     });
 
@@ -130,26 +140,31 @@ function EditTaskModal({ open, onClose }) {
         </div>
         <div className="input-st-container">
           <p className="bold">Subtasks</p>
-          {taskEdited.subtasks.map((subtask) => {
-            return (
-              <div key={subtask.id} className={`subtask-input ${theme}`}>
-                <input
-                  type="text"
-                  id="st-input-box"
-                  value={subtask.title}
-                  onInput={(e) =>
-                    handleSubtaskChange(subtask.id, e.target.value)
-                  }
-                />
-                <button onClick={() => handleRemoveSubtask(subtask.id)}>
-                  <img src="/assets/icon-cross.svg" alt="delete cross" />
-                </button>
-              </div>
-            );
-          })}
-          <button onClick={handleAddSubtask} className={`btn-secondry ${theme}`}>
-            + Add New Subtask
-          </button>
+          <div className="subtasks-container">
+            {taskEdited.subtasks.map((subtask) => {
+              return (
+                <div key={subtask.id} className={`subtask-input ${theme}`}>
+                  <input
+                    type="text"
+                    id="st-input-box"
+                    value={subtask.title}
+                    onInput={(e) =>
+                      handleSubtaskChange(subtask.id, e.target.value)
+                    }
+                  />
+                  <button onClick={() => handleRemoveSubtask(subtask.id)}>
+                    <img src="/assets/icon-cross.svg" alt="delete cross" />
+                  </button>
+                </div>
+              );
+            })}
+            <button
+              onClick={handleAddSubtask}
+              className={`btn-secondry ${theme}`}
+            >
+              + Add New Subtask
+            </button>
+          </div>
         </div>
         {/* dd-status */}
         <div className="input-status-container">
@@ -166,7 +181,7 @@ function EditTaskModal({ open, onClose }) {
               />
             </button>
             <div
-              className={`dd-menu`}
+              className={`dd-menu ${theme}`}
               style={{ display: showStatusDropdown ? `block` : `none` }}
             >
               {boardClicked.statuses.map((status) => {

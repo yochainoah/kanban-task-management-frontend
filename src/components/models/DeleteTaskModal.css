@@ -38,3 +38,12 @@
 .btn-secondry{
   width: 100%;
 } 
+
+@media screen and (min-width: 768px) {
+  .dt-btns-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+}

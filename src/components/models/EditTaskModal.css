@@ -32,12 +32,26 @@ textarea {
   padding: 24px;
   gap: 24px;
 }
+.edit-task-modal textarea {
+  outline: none;
+  height: 112px;
+  width: 100%;
+  border: 1px solid #828fa340;
+  border-radius: 4px;
+}
 .edit-task-modal input {
   height: 40px;
   border: 1px;
   border: 1px solid #828fa340;
   border-radius: 4px;
   width: 100%;
+  outline: none;
+}
+.edit-task-modal input:focus {
+  border: 2px solid var(--main-purple);
+}
+.edit-task-modal textarea:focus {
+  border: 2px solid var(--main-purple);
 }
 .edit-task-modal.light input,textarea{
   background-color: var(--white);
@@ -53,6 +67,12 @@ textarea {
 .edit-task-modal p {
   color: var(--grey-medium);
   margin-bottom: 8px;
+}
+.edit-task-modal.dark p {
+  color: var(--white);
+}
+.edit-task-modal.light p {
+  color: var(--grey-medium);
 }
 .edit-task-modal .btn-secondry {
   width: 100%;

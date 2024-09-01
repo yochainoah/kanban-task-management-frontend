@@ -12,7 +12,7 @@ import DeleteBoardModal from "./components/models/DeleteBoardModal";
 import BoardsAside from "./components/BoardsAside";
 
 function App() {
-  const { theme } = useAppContext();
+  const { theme,boardClicked , showSidebar, toggleSidebar} = useAppContext();
   const [showAddTask, setShowAddTask] = useState(false);
   const [showAddBoard, setShowAddBoard] = useState(false);
   const [showBtns, setShowBtns] = useState(false);
@@ -38,16 +38,21 @@ function App() {
   return (
     <>
       <header className={`${theme}`}>
-        <div className="header-left">
-          <img src="/assets/logo-mobile.svg" />
-          <BoardsDropdown openAddBoard={() => setShowAddBoard(true)} />
+        <div className= {showSidebar ? `header-left add-sidebar-pd`:`header-left remove-sidebar-pd`}>
+          <div className="header-desktop">
+            <h1 className={theme}>{boardClicked.name}</h1>
+          </div>
+          <div className="header-mobile">
+            <img src="/assets/logo-mobile.svg" />
+            <BoardsDropdown openAddBoard={() => setShowAddBoard(true)} />
+          </div>
         </div>
         <div className={`header-right ${theme}`}>
           <button
             onClick={() => setShowAddTask(!showAddTask)}
             className="btn-primary-l"
           >
-            <h4>Add New Task</h4>
+            <h4 className="add-task-text">+Add New Task</h4>
             <img src="/assets/icon-add-task-mobile.svg" />
           </button>
           {/* ellipsis */}
@@ -70,12 +75,13 @@ function App() {
           </div>
         </div>
       </header>
-      <main>
-        <BoardsAside openAddBoard={() => setShowAddBoard(true)}/>
+      <main className={showSidebar ? `` : `remove-sidebar-pd`}>
+        <BoardsAside openAddBoard={() => setShowAddBoard(true)} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/boards/details/:id" element={<ShowBoard />} />
         </Routes>
+        <button className={`show-asidebar-btn`} onClick={toggleSidebar}><img src="/assets/icon-show-sidebar.svg" alt="eye for showing sidebar" /></button>
       </main>
       <EditBoardModal open={showEditBoard} onClose={closeEditBoard} />
       <DeleteBoardModal

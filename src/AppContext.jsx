@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [theme, setTheme] = useState("light"); // default theme
+  const [showSidebar, setShowSidebar] = useState(true);
   const [boardClicked, setBoardClicked] = useState({});
   const [fetchBoard, setFetchBoard] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -14,17 +15,23 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const boardsData = await axios.get(`https://kanban-task-management-backend-blue.vercel.app/boards`);
+      const boardsData = await axios.get(
+        `${import.meta.env.VITE_API_ROOT}/boards`
+      );
+      console.log("boardsData", boardsData);
       setBoardsState({
         boards: boardsData.data,
         boardSelected: boardsData.data[0].name,
       });
-      setBoardClicked(boardsData.data[0])
+      setBoardClicked(boardsData.data[0]);
     })();
   }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar)
   };
 
   return (
@@ -42,6 +49,9 @@ export const AppProvider = ({ children }) => {
         setTaskClicked,
         boardsState,
         setBoardsState,
+        showSidebar,
+        setShowSidebar,
+        toggleSidebar
       }}
     >
       {children}

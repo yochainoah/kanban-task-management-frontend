@@ -36,7 +36,7 @@
 .toggleContainer {
   width: 235px;
   height: 48px;
-
+  flex-shrink: 0;
   border-radius: 6px;
   display: flex;
   align-items: center;
