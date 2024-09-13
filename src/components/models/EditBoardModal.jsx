@@ -80,14 +80,13 @@ function EditBoardModal({ open, onClose }) {
             onInput={(e) => editBoardData("name", e.target.value)}
           />
         </div>
-        <div className="input-st-container">
+        <div className="column-inputs-div">
           <p className="bold">Board Columns</p>
           {boardEdited.columns.map((c, index) => {
             return (
               <div key={c.index} className={`column-input ${theme}`}>
                 <input
                   type="text"
-                  id="st-input-box"
                   value={c.name}
                   onInput={(e) => handleColumnChange(index, e.target.value)}
                 />
@@ -97,7 +96,7 @@ function EditBoardModal({ open, onClose }) {
               </div>
             );
           })}
-          <button className="btn-secondry" onClick={handleAddColumn}>
+          <button className={`btn-secondry ${theme}`} onClick={handleAddColumn}>
             + Add New Column
           </button>
         </div>

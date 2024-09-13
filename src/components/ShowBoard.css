@@ -1,19 +1,66 @@
 .board {
   display: flex;
+  flex-direction: column;
   gap: 24px;
-  margin: 23px  0 0 10px;
+  margin: 23px 0 0 10px;
+  height: 100%;
+  width: 100%;
+}
+.column-headers {
+  display: flex;
+  gap: 24px;
+}
+.columns-container {
+  display: flex;
+  gap: 24px;
+  flex-shrink: 0;
+}
+.add-column-container {
+  width: 280px;
+  height: 100%;
+}
+.add-column-btn {
+  width: 280px;
+  border: none;
+  height: 853px;
+  color: var(--grey-medium);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 280px;
+}
+.add-column-btn h1 {
+  width: 100%;
+}
+.add-column-btn.light {
+  background: linear-gradient(
+    180deg,
+    rgba(233, 239, 250, 1) 0%,
+    rgba(233, 239, 250, 0.5) 100%
+  );
+}
+.add-column-btn.dark {
+  background: linear-gradient(
+    180deg,
+    rgba(43, 44, 55, 0.25) 0%,
+    rgba(43, 44, 55, 0.125) 100%
+  );
 }
 .column-container {
-  min-width: 280px;
+  width: 280px;
   display: flex;
+  flex: 0 0 280px;
   flex-direction: column;
   gap: 20px;
 }
-.column-container .column-heading{
+.column-headers .column-heading {
   display: flex;
+  width: 280px;
   gap: 12px;
+  flex: 0 0 280px;
 }
-.column-container h4{
+.column-headers h4 {
   text-transform: uppercase;
   color: var(--grey-medium);
 }
@@ -32,7 +79,7 @@
 .task.light {
   background-color: var(--white);
 }
-.task p{
+.task p {
   color: var(--grey-medium);
   font-weight: bold;
 }

@@ -11,14 +11,7 @@ import "./ShowBoard.css";
     1. component mounts, JSX renders
     2. useEffect is called
 */
-function handleSelectBoard(btnvalue) {
-  setBoardsState((prevState) => {
-    return { ...prevState, boardSelected: btnvalue };
-  });
-  // setOptionsShown((prevState) => !prevState);
-}
-const ShowBoard = () => {
-  // const [showTaskModal, setShowTaskModal] = useState(false);
+const ShowBoard = ({setShowEditBoard}) => {
   const { theme, showModal, setShowModal, taskClicked, setTaskClicked } =
     useAppContext();
   const { id } = useParams();
@@ -47,41 +40,50 @@ const ShowBoard = () => {
   const columnColors = ["purple", "green", "blue"];
   return (
     <div className="board">
-      {/* <BoardsAside /> */}
-      {boardClicked.columns &&
-        boardClicked.columns.map((column, index) => {
-          // console.log("boardState:", board);
-          return (
-            <div key={index} className="column-container">
-              <h4 className="column-heading">
+      <div className="column-headers">
+        {boardClicked.columns &&
+          boardClicked.columns.map((column, index) => {
+            return (
+              <h4 className="column-heading" key={index}>
                 <img
                   src={`/assets/circle-solid-${columnColors[index]}.svg`}
                   alt={`${columnColors[index]} circle`}
                 />
                 {column.name} ({column.tasks.length})
               </h4>
-              {column.tasks.map((task) => {
-                //  "[Object object]"
-                const stCompleted = task.subtasks.filter(
-                  (st) => st.isCompleted === true
-                );
+            );
+          })}
+      </div>
+      <div className="columns-container">
+        {boardClicked.columns &&
+          boardClicked.columns.map((column, index) => {
+            return (
+              <div key={index} className="column-container">
+                {column.tasks.map((task) => {
+                  const stCompleted = task.subtasks.filter(
+                    (st) => st.isCompleted === true
+                  );
 
-                return (
-                  <button
-                    onClick={() => handleTaskClick(task)}
-                    key={task._id}
-                    className={`task ${theme}`}
-                  >
-                    <h3>{task.title}</h3>
-                    <p>
-                      {stCompleted.length} of {task.subtasks.length} subtasks
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
+                  return (
+                    <button
+                      onClick={() => handleTaskClick(task)}
+                      key={task._id}
+                      className={`task ${theme}`}
+                    >
+                      <h3>{task.title}</h3>
+                      <p>
+                        {stCompleted.length} of {task.subtasks.length} subtasks
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+            );
+          })}
+        <button className={`add-column-btn ${theme}`} onClick={ () => setShowEditBoard(true)}>
+          <h1> + New Column</h1>
+        </button>
+      </div>
       <TaskModel open={showModal} onClose={closeModal} task={taskClicked} />
     </div>
   );

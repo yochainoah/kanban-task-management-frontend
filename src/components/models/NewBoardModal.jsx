@@ -110,7 +110,7 @@ function NewBoardModal({ open, onClose }) {
                     type="text"
                     id="st-input-box"
                     value={c.name}
-                    onInput={(e) => handleColumnChange(index, e.target.value)}
+                    onChange={(e) => handleColumnChange(index, e.target.value)}
                   />
                   <button onClick={() => handleRemoveColumn(index)}>
                     <img src="/assets/icon-cross.svg" alt="delete cross" />

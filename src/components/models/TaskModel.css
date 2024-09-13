@@ -1,18 +1,4 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 16px;
-  /* width: 100%;
-  height: 100%; */
-}
+
 
 .task-model-container {
   max-width: 500px;
@@ -23,6 +9,7 @@
   flex-direction: column;
   padding: 24px;
   gap: 24px;
+  position: absolute;
 }
 .task-model-container.dark {
   background-color: var(--dark-grey);
@@ -230,12 +217,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* box-shadow: 0 2px 9px 0 hsl(0 , 0%, 0%, 5.2%); */
   text-align: start;
   padding-left: 24px;
   padding-right: 18px;
   margin-bottom: 4px;
   cursor: pointer;
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .dd-btn.purple {
   border: 2px solid var(--main-purple);
@@ -262,6 +252,11 @@
   text-align: start;
   padding-left: 24px;
   color: var(--grey-medium);
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
+  cursor: pointer;
 }
 .dd-menu.light button {
   background-color: var(--white);

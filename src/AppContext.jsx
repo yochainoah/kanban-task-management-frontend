@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
   const [boardsState, setBoardsState] = useState({
     boards: [],
   });
-
+  
   useEffect(() => {
     (async () => {
       const boardsData = await axios.get(

@@ -12,7 +12,7 @@ import DeleteBoardModal from "./components/models/DeleteBoardModal";
 import BoardsAside from "./components/BoardsAside";
 
 function App() {
-  const { theme,boardClicked , showSidebar, toggleSidebar} = useAppContext();
+  const { theme, boardClicked, showSidebar, toggleSidebar } = useAppContext();
   const [showAddTask, setShowAddTask] = useState(false);
   const [showAddBoard, setShowAddBoard] = useState(false);
   const [showBtns, setShowBtns] = useState(false);
@@ -38,7 +38,13 @@ function App() {
   return (
     <>
       <header className={`${theme}`}>
-        <div className= {showSidebar ? `header-left add-sidebar-pd`:`header-left remove-sidebar-pd`}>
+        <div
+          className={
+            showSidebar
+              ? `header-left add-sidebar-pd`
+              : `header-left remove-sidebar-pd`
+          }
+        >
           <div className="header-desktop">
             <h1 className={theme}>{boardClicked.name}</h1>
           </div>
@@ -79,9 +85,17 @@ function App() {
         <BoardsAside openAddBoard={() => setShowAddBoard(true)} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/boards/details/:id" element={<ShowBoard />} />
+          <Route
+            path="/boards/details/:id"
+            element={<ShowBoard setShowEditBoard={setShowEditBoard} />}
+          />
         </Routes>
-        <button className={`show-asidebar-btn`} onClick={toggleSidebar}><img src="/assets/icon-show-sidebar.svg" alt="eye for showing sidebar" /></button>
+        <button className={`show-asidebar-btn`} onClick={toggleSidebar}>
+          <img
+            src="/assets/icon-show-sidebar.svg"
+            alt="eye for showing sidebar"
+          />
+        </button>
       </main>
       <EditBoardModal open={showEditBoard} onClose={closeEditBoard} />
       <DeleteBoardModal

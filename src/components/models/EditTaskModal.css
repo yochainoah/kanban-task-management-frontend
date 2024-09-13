@@ -16,10 +16,17 @@
   color: var(--white);
   background-color: var(--dark-grey);
 }
-.edit-task-modal input,
-textarea {
+.edit-task-modal input{
   font-weight: 500;
   padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
+}
+.edit-task-modal textarea{
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .edit-task-modal {
   max-width: 500px;

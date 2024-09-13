@@ -1,16 +1,4 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 16px;
-}
+
 .add-task-model {
   max-width: 500px;
   width: 100%;
@@ -21,6 +9,7 @@
   flex-direction: column;
   padding: 24px;
   gap: 24px;
+  /* position: absolute; */
 }
 .add-task-model.light {
   background-color: var(--white);
@@ -36,6 +25,10 @@
   width: 100%;
   outline: none;
   cursor: pointer;
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .add-task-model textarea {
   outline: none;
@@ -43,6 +36,10 @@
   width: 100%;
   border: 1px solid #828fa340;
   border-radius: 4px;
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .add-task-model textarea:focus {
   border: 2px solid var(--main-purple);

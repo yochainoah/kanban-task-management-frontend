@@ -6,7 +6,11 @@
 p {
   font-weight: 300;
 }
-
+#root {
+  height: 970px;
+  position: absolute;
+  width: 100%;
+}
 :root {
   --main-purple: #635fc7;
   --main-purple-hover: #a8a4ff;
@@ -29,7 +33,23 @@ body {
   overflow-x: hidden; /* Prevent horizontal overflow on the body */
 }
 main {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+  overflow-y: initial;
+  height: 100%;
 }
 .light {
   background-color: var(--light-grey);
@@ -44,7 +64,7 @@ main {
   padding: 0;
   margin: 0;
 }
-
+/* heading XL */
 h1 {
   font-weight: bold;
   font-size: 24px;
@@ -71,7 +91,7 @@ h4 {
 }
 /* body L */
 p {
-  font-weight: medium;
+  font-weight: 500;
   font-size: 13px;
   line-height: 23px;
 }
@@ -132,6 +152,7 @@ header {
   padding: 0 16px;
   position: absolute;
   right: 0;
+  left: 0;
   z-index: 2;
 }
 
@@ -141,7 +162,6 @@ main {
   display: flex;
   transition: transform 0.3s ease;
 }
-
 
 .header-left {
   display: flex;
@@ -218,10 +238,13 @@ main {
   header {
     height: 80px;
   }
-  .add-sidebar-pd{
+  .add-sidebar-pd {
     padding-left: 260px;
   }
   .remove-sidebar-pd {
     padding-left: 0;
+  }
+  #root {
+    height: 1024px;
   }
 }
