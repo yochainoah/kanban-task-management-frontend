@@ -54,7 +54,7 @@ const Login = () => {
           />
         </div>
         <p className="text-sm text-white text-center">
-          No account yet? <NavLink to="/signup">Sign up</NavLink>
+          No account yet? <NavLink to="/">Sign up</NavLink>
         </p>
         <div>
           <button className="btn-primary-l" onClick={onLogin}>

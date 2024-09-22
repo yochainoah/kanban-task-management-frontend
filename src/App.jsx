@@ -10,10 +10,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route
-          path="/"
+          path="/home"
           element={<Home />} // Home now includes the ShowBoard logic
         >
           <Route path="boards/details/:id" element={<ShowBoard />} />
