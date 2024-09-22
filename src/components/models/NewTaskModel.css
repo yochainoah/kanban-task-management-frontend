@@ -1,4 +1,3 @@
-
 .add-task-model {
   max-width: 500px;
   width: 100%;
@@ -30,6 +29,12 @@
   font-size: 13px;
   line-height: 23px;
 }
+.add-task-model input::placeholder {
+  color: rgb(130, 143, 163, 0.50)
+}
+.add-task-model textarea::placeholder {
+  color: rgb(130, 143, 163, 0.50)
+}
 .add-task-model textarea {
   outline: none;
   height: 112px;
@@ -38,6 +43,7 @@
   border-radius: 4px;
   font-weight: 500;
   padding-left: 16px;
+  padding-right: 25px;
   font-size: 13px;
   line-height: 23px;
 }
@@ -72,6 +78,7 @@ textarea {
 .add-task-model .btn-secondry {
   width: 100%;
   font-weight: bold;
+  margin-top: 12px;
 }
 .add-task-model .btn-primary-s {
   font-weight: bold;
@@ -85,18 +92,23 @@ textarea {
   row-gap: 12px;
 }
 .subtask-input {
+  position: relative;
   width: 100%;
   display: flex;
+}
+.warning-text {
+  position: absolute;
+  top: 50%;
+  right: 0; 
+  transform: translateX(-50%) translateY(-50%);
+  color: var(--red);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 23px;
 }
 .subtask-input.red input {
   border: 2px solid var(--red);
   padding-right: 16px;
-}
-.subtask-input.red input::placeholder {
-  color: var(--red);
-  opacity: 1;
-  text-align: right;
-  
 }
 .subtask-input.light {
   background-color: var(--white);
@@ -129,4 +141,12 @@ textarea {
 }
 .btn-secondry:hover.dark {
   background-color: var(--white);
+}
+.add-task-model p.error-message {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 23px;
+  color: var(--red);
+  margin: 8px 0 0 0;
+  text-align: center;
 }

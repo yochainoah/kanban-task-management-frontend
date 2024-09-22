@@ -13,13 +13,20 @@ const TaskModel = ({ open, onClose, task }) => {
   const [showBtns, setShowBtns] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { theme, boardClicked, fetchBoard, setFetchBoard, setShowModal } =
-    useAppContext();
+  const {
+    theme,
+    boardClicked,
+    setBoardClicked,
+    fetchBoard,
+    setFetchBoard,
+    setShowModal,
+  } = useAppContext();
   function handelDropdown() {
     setShowDropdown(!showDropdown);
   }
   const handleCloseModal = () => {
     setShowDropdown(false); // Close the dropdown
+    setShowBtns(false); // Close the buttons modal
     onClose(); // Call the onClose function to close the modal
   };
   const closeEditModal = () => {
@@ -29,7 +36,17 @@ const TaskModel = ({ open, onClose, task }) => {
     setDeleteModalOpen(false);
   };
   async function changeStatus(newStatus) {
-    console.log("task id:", task._id);
+    // Optimistically update boardClicked in the UI
+    setBoardClicked((prevBoard) => {
+      const newBoard = { ...prevBoard };
+      const newColumn = newBoard.columns.find((c) => c.name === newStatus);
+      const oldColumn = newBoard.columns.find((c) => c.name === task.status);
+
+      oldColumn.tasks.filter((t) => t._id !== task._id);
+      newColumn.tasks.push({ ...task, status: newStatus });
+
+      return newBoard;
+    });
 
     const data = {
       title: task.title,
@@ -38,11 +55,10 @@ const TaskModel = ({ open, onClose, task }) => {
       description: task.description,
       boardId: boardClicked._id,
     };
+    console.log("boardState:", boardClicked);
     await axios.put(`${import.meta.env.VITE_API_ROOT}/tasks/${task._id}`, data);
 
     setFetchBoard(!fetchBoard);
-    console.log("boardState:", board);
-    // setTaskClicked({status:newStatus,...taskClicked})
     setShowDropdown(false); // Close the dropdown
     setShowModal(false);
   }
@@ -100,22 +116,22 @@ const TaskModel = ({ open, onClose, task }) => {
         }}
         className={`task-model-container ${theme}`}
       >
+        <div
+          style={{ display: showBtns ? `block` : `none` }}
+          className={`task-header-menu ${theme}`}
+        >
+          <button className="edit-t-btn" onClick={handleEditTask}>
+            Edit task
+          </button>
+          <button className="delete-t-btn" onClick={handleDeleteModalOpen}>
+            Delete task
+          </button>
+        </div>
         <div className={`task-header ${theme}`}>
           <h2>{task.title}</h2>
           <button onClick={() => setShowBtns(!showBtns)}>
             <img src="/assets/icon-vertical-ellipsis.svg" alt="ellipsis" />
           </button>
-          <div
-            style={{ display: showBtns ? `block` : `none` }}
-            className={`task-header-menu ${theme}`}
-          >
-            <button className="edit-t-btn" onClick={handleEditTask}>
-              Edit task
-            </button>
-            <button className="delete-t-btn" onClick={handleDeleteModalOpen}>
-              Delete task
-            </button>
-          </div>
         </div>
         {task.description && (
           <p className="task-description">{task.description}</p>
@@ -129,7 +145,10 @@ const TaskModel = ({ open, onClose, task }) => {
             <div className="subtasks-list">
               {task.subtasks.map((subtask, index) => {
                 return (
-                  <div key={index} className={`subtask-box ${theme}`}>
+                  <div
+                    key={`${subtask.title}-${index}`}
+                    className={`subtask-box ${theme}`}
+                  >
                     <label
                       htmlFor={`subtask-${index}`}
                       className={
@@ -173,9 +192,12 @@ const TaskModel = ({ open, onClose, task }) => {
               className={`dd-menu ${theme}`}
               style={{ display: showDropdown ? `block` : `none` }}
             >
-              {boardClicked.statuses.map((status) => {
+              {boardClicked.statuses.map((status, index) => {
                 return (
-                  <button key={status} onClick={() => changeStatus(status)}>
+                  <button
+                    key={`${status}-${index}`}
+                    onClick={() => changeStatus(status)}
+                  >
                     {status}
                   </button>
                 );

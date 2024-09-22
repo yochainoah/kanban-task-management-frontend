@@ -1,4 +1,5 @@
 .task-model-container {
+  position: relative;
   max-width: 500px;
   width: 100%;
   display: flex;
@@ -47,19 +48,21 @@
 }
 .task-header-menu {
   position: absolute;
-  bottom: 0;
   right: 0;
-  translate: 0 100%;
+  top: 48px;
+  transform: translateX(50%);
   width: 192px;
   border-radius: 8px;
   padding: 16px;
   background-color: var(--white);
+  z-index: 1001;
 }
 .task-header-menu button {
   display: block;
   height: 47px;
   width: 100%;
   text-align: left;
+  border: none;
 }
 .task-header-menu.light {
   background-color: var(--white);
@@ -183,6 +186,7 @@
 
 /* dd */
 .status-container {
+  
   display: flex;
   flex-direction: column;
   gap: 8px;

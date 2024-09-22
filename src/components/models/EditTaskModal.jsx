@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useAppContext } from "../../AppContext";
 import { useState } from "react";
 import axios from "axios";
@@ -8,7 +9,10 @@ import "./EditTaskModal.css";
 
 function EditTaskModal({ open, onClose }) {
   const { theme, boardClicked, setBoardClicked, taskClicked } = useAppContext();
-
+  const [warning, setWarning] = useState({
+    warningStatus: false,
+    warningId: "",
+  });
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [taskEdited, setTaskEdited] = useState({
     title: taskClicked.title,
@@ -18,9 +22,19 @@ function EditTaskModal({ open, onClose }) {
     // We can't get [0] on undefined, so we add the ?. to make javascript ignore it if it's undefined
     status: taskClicked.status,
   });
+  const [validationErrors, setValidationErrors] = useState({
+    titleError: "",
+    statusError: "",
+    subtasksError: "",
+  });
   console.log("taskEdited:", taskEdited);
-  const handleCloseAddTask = () => {
+  const handleCloseEditTask = () => {
     // setShowDropdown(false); // Close the dropdown
+    setValidationErrors({
+      titleError: "",
+      statusError: "",
+      subtasksError: "",
+    });
     onClose(); // Call the onClose function to close the modal
   };
   const handleTaskTitle = (titleAdded) => {
@@ -34,12 +48,28 @@ function EditTaskModal({ open, onClose }) {
     setShowStatusDropdown(!showStatusDropdown);
   };
   const handleRemoveSubtask = (id) => {
-    setTaskEdited((prevState) => {
-      return {
-        ...prevState,
-        subtasks: prevState.subtasks.filter((subtask) => subtask.id !== id),
-      };
-    });
+    // setTaskEdited((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     subtasks: prevState.subtasks.filter((subtask) => subtask.id !== id),
+    //   };
+    // });
+    const subtaskToBeDeleted = taskEdited.subtasks.find((el) => el.id === id);
+    if (!subtaskToBeDeleted.title && taskEdited.subtasks.length <= 1) {
+      setWarning((prevState) => {
+        const newState = { ...prevState };
+        newState.warningId = subtaskToBeDeleted.id;
+        newState.warningStatus = true;
+        return newState;
+      });
+    } else {
+      setTaskEdited((prevState) => {
+        return {
+          ...prevState,
+          subtasks: prevState.subtasks.filter((subtask) => subtask.id !== id),
+        };
+      });
+    }
   };
 
   const handleAddSubtask = () => {
@@ -48,7 +78,7 @@ function EditTaskModal({ open, onClose }) {
         ...prevState,
         subtasks: [
           ...prevState.subtasks,
-          { title: "", isCompleted: false, id: Date.now() },
+          { title: "", isCompleted: false, id: uuidv4() },
         ],
       };
     });
@@ -69,14 +99,41 @@ function EditTaskModal({ open, onClose }) {
   };
 
   async function handleTaskEditSubmit() {
-    // console.log("Task edited:", taskEdited);
+    let errors = {
+      titleError: "",
+      statusError: "",
+      subtasksError: "",
+    };
+
+    // Title validation
+    if (!taskEdited.title.trim()) {
+      errors.titleError = "Title cannot be empty";
+    }
+
+    // Status validation
+    if (!taskEdited.status) {
+      errors.statusError = "Status must be selected";
+    }
+
+    // Subtasks validation
+    const invalidSubtasks = taskEdited.subtasks.filter(
+      (subtask) => !subtask.title.trim()
+    );
+    if (invalidSubtasks.length > 0) {
+      4;
+      errors.subtasksError = "Subtasks cannot be empty";
+    }
+
+    // Check if there are any errors
+    if (errors.titleError || errors.statusError || errors.subtasksError) {
+      setValidationErrors(errors);
+      return;
+    }
 
     const data = {
       ...taskEdited,
       boardId: boardClicked._id,
     };
-    console.log("taskedite", data);
-    // console.log("taskClicked  :", taskClicked);
     let taskData = await axios.put(
       `${import.meta.env.VITE_API_ROOT}/tasks/${taskClicked._id}`,
       data
@@ -109,7 +166,7 @@ function EditTaskModal({ open, onClose }) {
 
   if (!open) return null;
   return (
-    <div onClick={handleCloseAddTask} className="overlay">
+    <div onClick={handleCloseEditTask} className="overlay">
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -127,6 +184,9 @@ function EditTaskModal({ open, onClose }) {
             value={`${taskEdited.title}`}
             onInput={(e) => handleTaskTitle(e.target.value)}
           />
+          {validationErrors.titleError && (
+            <p className="error-message">{validationErrors.titleError}</p>
+          )}
         </div>
         <div className="add-t-desc">
           <label htmlFor="task-description" id="label">
@@ -142,29 +202,54 @@ function EditTaskModal({ open, onClose }) {
           <p className="bold">Subtasks</p>
           <div className="subtasks-container">
             {taskEdited.subtasks.map((subtask) => {
+              let warningIndicator =
+                warning.warningStatus && warning.warningId === subtask.id;
               return (
-                <div key={subtask.id} className={`subtask-input ${theme}`}>
+                <div
+                  key={subtask.id}
+                  className={
+                    warningIndicator
+                      ? `subtask-input ${theme} red`
+                      : `subtask-input ${theme}`
+                  }
+                >
                   <input
                     type="text"
                     id="st-input-box"
                     value={subtask.title}
+                    placeholder={
+                      warning.warningStatus && warning.warningId === subtask.id
+                        ? "Can't be empty"
+                        : ""
+                    }
                     onInput={(e) =>
                       handleSubtaskChange(subtask.id, e.target.value)
                     }
                   />
                   <button onClick={() => handleRemoveSubtask(subtask.id)}>
-                    <img src="/assets/icon-cross.svg" alt="delete cross" />
+                    {warningIndicator && (
+                      <img
+                        src="/assets/icon-cross-red.svg"
+                        alt="delete cross"
+                      />
+                    )}
+                    {!warningIndicator && (
+                      <img src="/assets/icon-cross.svg" alt="delete cross" />
+                    )}
                   </button>
                 </div>
               );
             })}
-            <button
-              onClick={handleAddSubtask}
-              className={`btn-secondry ${theme}`}
-            >
-              + Add New Subtask
-            </button>
           </div>
+          {validationErrors.subtasksError && (
+            <p className="error-message">{validationErrors.subtasksError}</p>
+          )}
+          <button
+            onClick={handleAddSubtask}
+            className={`btn-secondry ${theme}`}
+          >
+            + Add New Subtask
+          </button>
         </div>
         {/* dd-status */}
         <div className="input-status-container">
@@ -184,9 +269,12 @@ function EditTaskModal({ open, onClose }) {
               className={`dd-menu ${theme}`}
               style={{ display: showStatusDropdown ? `block` : `none` }}
             >
-              {boardClicked.statuses.map((status) => {
+              {boardClicked.statuses.map((status, index) => {
                 return (
-                  <button key={status} onClick={() => handleTaskStatus(status)}>
+                  <button
+                    key={`${status}-${index}`}
+                    onClick={() => handleTaskStatus(status)}
+                  >
                     {status}
                   </button>
                 );

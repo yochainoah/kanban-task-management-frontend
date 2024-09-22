@@ -16,18 +16,6 @@
   color: var(--white);
   background-color: var(--dark-grey);
 }
-.edit-task-modal input{
-  font-weight: 500;
-  padding-left: 16px;
-  font-size: 13px;
-  line-height: 23px;
-}
-.edit-task-modal textarea{
-  font-weight: 500;
-  padding-left: 16px;
-  font-size: 13px;
-  line-height: 23px;
-}
 .edit-task-modal {
   max-width: 500px;
   width: 100%;
@@ -45,6 +33,10 @@
   width: 100%;
   border: 1px solid #828fa340;
   border-radius: 4px;
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .edit-task-modal input {
   height: 40px;
@@ -53,6 +45,10 @@
   border-radius: 4px;
   width: 100%;
   outline: none;
+  font-weight: 500;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .edit-task-modal input:focus {
   border: 2px solid var(--main-purple);
@@ -84,7 +80,16 @@
 .edit-task-modal .btn-secondry {
   width: 100%;
   font-weight: bold;
+  margin-top: 12px;
 }
 .edit-task-modal .btn-primary-s {
   font-weight: bold;
+}
+.edit-task-modal  p.error-message {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 23px;
+  color: var(--red);
+  margin: 8px 0 0 0;
+  text-align: center;
 }

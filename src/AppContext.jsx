@@ -9,10 +9,11 @@ export const AppProvider = ({ children }) => {
   const [fetchBoard, setFetchBoard] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [taskClicked, setTaskClicked] = useState({});
+  const [showEditBoard, setShowEditBoard] = useState(false);
   const [boardsState, setBoardsState] = useState({
     boards: [],
   });
-  
+
   useEffect(() => {
     (async () => {
       const boardsData = await axios.get(
@@ -26,12 +27,11 @@ export const AppProvider = ({ children }) => {
       setBoardClicked(boardsData.data[0]);
     })();
   }, []);
-
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
   const toggleSidebar = () => {
-    setShowSidebar(!showSidebar)
+    setShowSidebar(!showSidebar);
   };
 
   return (
@@ -51,7 +51,9 @@ export const AppProvider = ({ children }) => {
         setBoardsState,
         showSidebar,
         setShowSidebar,
-        toggleSidebar
+        toggleSidebar,
+        showEditBoard,
+        setShowEditBoard,
       }}
     >
       {children}

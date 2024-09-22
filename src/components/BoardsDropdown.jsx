@@ -41,11 +41,11 @@ export default function BoardsDropdown({openAddBoard}) {
         }
       >
         <h4>ALL BOARDS {`(${boardsState.boards.length})`}</h4>
-        {boardsState.boards.map((board, index) => {
+        {boardsState.boards.map((board) => {
           return (
             <Link
               to={`/boards/details/${board._id}`}
-              key={`${board.name} ${index}`}
+              key={`${board._id}`}
             >
               <button
                 onClick={() => handleSelectBoard(board)}

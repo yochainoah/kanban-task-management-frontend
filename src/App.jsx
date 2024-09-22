@@ -1,109 +1,24 @@
-import BoardsDropdown from "./components/BoardsDropdown";
-import { useState } from "react";
-import { useAppContext } from "./AppContext";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import ShowBoard from "./components/ShowBaord";
-import NewTaskModel from "./components/models/NewTaskModel";
-import NewBoardModal from "./components/models/NewBoardModal";
-import "./App.css";
-import EditBoardModal from "./components/models/EditBoardModal";
-import DeleteBoardModal from "./components/models/DeleteBoardModal";
-import BoardsAside from "./components/BoardsAside";
+import { useAppContext } from "./AppContext";
 
 function App() {
-  const { theme, boardClicked, showSidebar, toggleSidebar } = useAppContext();
-  const [showAddTask, setShowAddTask] = useState(false);
-  const [showAddBoard, setShowAddBoard] = useState(false);
-  const [showBtns, setShowBtns] = useState(false);
-  const [showEditBoard, setShowEditBoard] = useState(false);
-  const [showDeleteBoard, setShowDeleteBoard] = useState(false);
-  const closeAddTask = () => {
-    setShowAddTask(false);
-  };
-  const closeAddBoard = () => {
-    setShowAddBoard(false);
-  };
-  const closeEditBoard = () => {
-    setShowEditBoard(false);
-  };
-  const handleEditBoardOpen = () => {
-    setShowEditBoard(true);
-    setShowBtns(false);
-  };
-  const handleDeleteBoardOpen = () => {
-    setShowDeleteBoard(true);
-    setShowBtns(false);
-  };
+  const { setShowEditBoard } = useAppContext();
   return (
     <>
-      <header className={`${theme}`}>
-        <div
-          className={
-            showSidebar
-              ? `header-left add-sidebar-pd`
-              : `header-left remove-sidebar-pd`
-          }
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={<Home />} // Home now includes the ShowBoard logic
         >
-          <div className="header-desktop">
-            <h1 className={theme}>{boardClicked.name}</h1>
-          </div>
-          <div className="header-mobile">
-            <img src="/assets/logo-mobile.svg" />
-            <BoardsDropdown openAddBoard={() => setShowAddBoard(true)} />
-          </div>
-        </div>
-        <div className={`header-right ${theme}`}>
-          <button
-            onClick={() => setShowAddTask(!showAddTask)}
-            className="btn-primary-l"
-          >
-            <h4 className="add-task-text">+Add New Task</h4>
-            <img src="/assets/icon-add-task-mobile.svg" />
-          </button>
-          {/* ellipsis */}
-          <button
-            className="brd-options-btn"
-            onClick={() => setShowBtns(!showBtns)}
-          >
-            <img src="/assets/icon-vertical-ellipsis.svg" alt="ellipsis" />
-          </button>
-          <div
-            style={{ display: showBtns ? `block` : `none` }}
-            className={`board-header-menu ${theme}`}
-          >
-            <button className="edit-b-btn" onClick={handleEditBoardOpen}>
-              Edit Board
-            </button>
-            <button className="delete-b-btn" onClick={handleDeleteBoardOpen}>
-              Delete Board
-            </button>
-          </div>
-        </div>
-      </header>
-      <main className={showSidebar ? `` : `remove-sidebar-pd`}>
-        <BoardsAside openAddBoard={() => setShowAddBoard(true)} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/boards/details/:id"
-            element={<ShowBoard setShowEditBoard={setShowEditBoard} />}
-          />
-        </Routes>
-        <button className={`show-asidebar-btn`} onClick={toggleSidebar}>
-          <img
-            src="/assets/icon-show-sidebar.svg"
-            alt="eye for showing sidebar"
-          />
-        </button>
-      </main>
-      <EditBoardModal open={showEditBoard} onClose={closeEditBoard} />
-      <DeleteBoardModal
-        open={showDeleteBoard}
-        onClose={() => setShowDeleteBoard(false)}
-      />
-      <NewBoardModal open={showAddBoard} onClose={closeAddBoard} />
-      <NewTaskModel open={showAddTask} onClose={closeAddTask} />
+          <Route path="boards/details/:id" element={<ShowBoard />} />
+        </Route>
+      </Routes>
     </>
   );
 }

@@ -3,7 +3,7 @@
   width: 260px;
   height: 100vh;
   position: fixed;
-  top:0;
+  top: 0;
   left: 0;
   z-index: 3;
   padding-bottom: 32px;
@@ -21,7 +21,7 @@
   align-items: center;
   /* justify-content: center; */
 }
-.logo-container .logo-aside{
+.logo-container .logo-aside {
   padding-left: 24px;
 }
 .board-options-aside.light {
@@ -30,54 +30,80 @@
 .board-options-aside.dark {
   background-color: var(--dark-grey);
 }
-.board-options-aside a{
+.board-options-aside a {
   text-decoration: none;
 }
-.board-options-aside button{
+.board-options-aside button {
   border: none;
-  width:100%;
+  width: 100%;
   height: 48px;
   display: flex;
   justify-content: start;
   align-items: center;
-  gap:12px;
+  gap: 12px;
   color: var(--grey-medium);
   padding-left: 24px;
   flex-shrink: 0;
 }
-.board-options-aside button.light{
+.board-options-aside button.light {
   background-color: var(--white);
 }
-.board-options-aside button.dark{
+.board-options-aside button.dark {
   background-color: var(--dark-grey);
 }
-.board-options-aside h4{
-  color:var(--grey-medium);
-  padding-left: 24px;
-  height: 48px;
-  display: flex;
-  align-items: center; 
-}
-.board-options-aside button.selected {
+.board-options-aside .aside-board-btn.selected {
   background-color: var(--main-purple);
   color: var(--white);
   width: 240px;
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
 }
-.board-options-aside button.add-board-btn{
+.aside-top .aside-board-btn.light:hover {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 240px;
+  color: var(--main-purple);
+  background-color: rgb(99, 95, 199, 0.1);
+  cursor: pointer;
+}
+.aside-top .aside-board-btn.dark:hover {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 240px;
+  color: var(--main-purple);
+  background-color: var(--white);
+  cursor: pointer;
+}
+.aside-top .aside-board-btn.light:hover svg path {
+  fill: var(--main-purple);
+}
+.aside-top .aside-board-btn.dark:hover svg path {
+  fill: var(--main-purple);
+}
+.board-options-aside .aside-board-btn.selected svg path {
+  fill: var(--white);
+}
+.board-options-aside h4 {
+  color: var(--grey-medium);
+  padding-left: 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.board-options-aside button.add-board-btn {
   cursor: pointer;
   color: var(--main-purple);
 }
-.board-options-aside button.add-board-btn.light{
+.board-options-aside button.add-board-btn.light {
   color: var(--main-purple);
   background-color: var(--white);
 }
-.board-options-aside button.add-board-btn.dark{
+.board-options-aside button.add-board-btn.dark {
   color: var(--main-purple);
   background-color: var(--dark-grey);
 }
-.aside-bottom{
+.aside-bottom {
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -85,41 +111,40 @@
   justify-content: center;
   gap: 12px;
 }
-.aside-bottom .hide-asidebar-btn{
+.aside-bottom .hide-asidebar-btn {
   width: 240px;
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
   cursor: pointer;
 }
 
-.aside-bottom .hide-asidebar-btn.light{
+.aside-bottom .hide-asidebar-btn.light {
   color: var(--grey-medium);
   background-color: var(--white);
 }
-.aside-bottom .hide-asidebar-btn.light:hover{
+.aside-bottom .hide-asidebar-btn.light:hover {
   color: var(--main-purple);
-  background-color: rgb(99,95,199,0.1);
+  background-color: rgb(99, 95, 199, 0.1);
 }
-.aside-bottom .hide-asidebar-btn.dark{
+.aside-bottom .hide-asidebar-btn.dark {
   color: var(--grey-medium);
   background-color: var(--dark-grey);
 }
-.aside-bottom .hide-asidebar-btn.dark:hover{
+.aside-bottom .hide-asidebar-btn.dark:hover {
   color: var(--main-purple);
   background-color: var(--white);
 }
-.aside-bottom .hide-asidebar-btn:hover svg path{
+.aside-bottom .hide-asidebar-btn:hover svg path {
   fill: var(--main-purple);
 }
-.toggleContainer{
+.toggleContainer {
   margin-left: auto;
   margin-right: auto;
 }
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
   .board-options-aside {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-
 }

@@ -84,7 +84,7 @@ function EditBoardModal({ open, onClose }) {
           <p className="bold">Board Columns</p>
           {boardEdited.columns.map((c, index) => {
             return (
-              <div key={c.index} className={`column-input ${theme}`}>
+              <div key={c._id} className={`column-input ${theme}`}>
                 <input
                   type="text"
                   value={c.name}

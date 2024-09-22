@@ -1,10 +1,18 @@
 .board {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   margin: 23px 0 0 10px;
   height: 100%;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.board-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .column-headers {
   display: flex;
@@ -82,4 +90,18 @@
 .task p {
   color: var(--grey-medium);
   font-weight: bold;
+}
+.empty-board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--grey-medium);
+  gap: 22px;
+  padding: 20px;
+  text-align: center;
+}
+
+.empty-board-container .btn-primary-l {
+  width: 174px;
+  cursor: pointer;
 }

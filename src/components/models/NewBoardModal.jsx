@@ -6,24 +6,30 @@ import "./NewBoardModal.css";
 // import dotenv from "dotenv";
 // dotenv.config();
 
-const initialColumns = [
-  {
-    name: "",
-    tasks: [],
-  },
-  {
-    name: "",
-    tasks: [],
-  },
-];
+// const initialColumns = [
+//   {
+//     name: "",
+//     tasks: [],
+//   },
+//   {
+//     name: "",
+//     tasks: [],
+//   },
+// ];
 
 function NewBoardModal({ open, onClose }) {
+  const [boardvalidationErrors, setBoardValidationErrors] = useState({
+    nameError: "",
+  });
   const [boardAdded, setBoardAdded] = useState({
     name: "",
-    columns: initialColumns,
+    columns: [],
   });
   const { setBoardsState, theme } = useAppContext();
   function handleCloseAddBoard() {
+    setBoardValidationErrors({
+      nameError: "",
+    });
     onClose();
   }
   // const handleBoardName = (nameAdded) => {
@@ -57,6 +63,12 @@ function NewBoardModal({ open, onClose }) {
     });
   }
   async function handleBoardSubmit() {
+    // name validation
+    if (!boardAdded.name.trim()) {
+      setBoardValidationErrors({ nameError: "Board name cannot be empty" });
+      return;
+    }
+
     console.log("board added:", boardAdded);
     const res = await axios.post(
       `${import.meta.env.VITE_API_ROOT}/addBoard`,
@@ -70,13 +82,6 @@ function NewBoardModal({ open, onClose }) {
     });
     onClose();
   }
-  // addBoardData("name", "doug")
-  /*
-    {
-      ...boardAdded,
-      name: "doug"
-    }
-  */
   if (!open) return null;
   return (
     <div onClick={handleCloseAddBoard} className="overlay">
@@ -96,16 +101,17 @@ function NewBoardModal({ open, onClose }) {
             id="task-title"
             onInput={(e) => addBoardData("name", e.target.value)}
           />
+          {boardvalidationErrors.nameError && (
+            <p className="error-message">{boardvalidationErrors.nameError}</p>
+          )}
         </div>
+
         <div className="input-column-container">
           <p className="bold">Board Columns</p>
           <div className="column-inputs-div">
             {boardAdded.columns.map((c, index) => {
               return (
-                <div
-                  key={`${c.name} ${index}`}
-                  className={`subtask-input ${theme}`}
-                >
+                <div key={`${c._id}`} className={`subtask-input ${theme}`}>
                   <input
                     type="text"
                     id="st-input-box"

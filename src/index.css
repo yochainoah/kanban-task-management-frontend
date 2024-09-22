@@ -10,6 +10,7 @@ p {
   height: 970px;
   position: absolute;
   width: 100%;
+  background-color: var(--light-grey);
 }
 :root {
   --main-purple: #635fc7;
