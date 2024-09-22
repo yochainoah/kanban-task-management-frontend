@@ -16,7 +16,10 @@ function App() {
           path="/"
           element={<Home />} // Home now includes the ShowBoard logic
         >
-          <Route path="boards/details/:id" element={<ShowBoard />} />
+          <Route
+            path="boards/details/:id"
+            element={<ShowBoard setShowEditBoard={setShowEditBoard} />}
+          />
         </Route>
       </Routes>
     </>
