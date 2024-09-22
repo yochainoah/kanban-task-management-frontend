@@ -93,7 +93,9 @@ const Home = () => {
           </div>
         </div>
         <div className={`header-right ${theme}`}>
-          <button onClick={handleLogout} className="btn-primary-l"><h4>Signout</h4></button>
+          <button onClick={handleLogout} className="btn-primary-l">
+            <h4>Signout</h4>
+          </button>
           <button
             onClick={() => setShowAddTask(!showAddTask)}
             className="btn-primary-l"
@@ -123,7 +125,7 @@ const Home = () => {
       </header>
       <main className={showSidebar ? `` : `remove-sidebar-pd`}>
         <BoardsAside openAddBoard={() => setShowAddBoard(true)} />
-        {!id && <ShowBoard />}
+        {!id && <ShowBoard setShowEditBoard={setShowEditBoard} />}
         {id && <Outlet />}
         <button className={`show-asidebar-btn`} onClick={toggleSidebar}>
           <img
