@@ -47,7 +47,7 @@ function BoardsAside({ openAddBoard }) {
         <h4>ALL BOARDS {`(${boardsState.boards.length})`}</h4>
         {boardsState.boards.map((board, index) => {
           return (
-            <Link to={`/boards/details/${board._id}`} key={`${board._id}`}>
+            <Link to={`boards/details/${board._id}`} key={`${board._id}`}>
               <button
                 onClick={() => handleSelectBoard(board.name)}
                 value={board.name}

@@ -27,15 +27,6 @@ function App() {
             element={<ShowBoard setShowEditBoard={setShowEditBoard} />}
           />
         </Route>
-        {/* <Route
-          path="/"
-          element={<Home />} // Home now includes the ShowBoard logic
-        >
-          <Route
-            path="boards/details/:id"
-            element={<ShowBoard setShowEditBoard={setShowEditBoard} />}
-          />
-        </Route> */}
       </Routes>
     </>
   );

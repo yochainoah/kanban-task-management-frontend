@@ -4,8 +4,15 @@ import { useAppContext } from "./../AppContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function BoardsDropdown({openAddBoard}) {
-  const { theme, toggleTheme,boardsState, setBoardsState,boardClicked ,setBoardClicked } = useAppContext();
+export default function BoardsDropdown({ openAddBoard }) {
+  const {
+    theme,
+    toggleTheme,
+    boardsState,
+    setBoardsState,
+    boardClicked,
+    setBoardClicked,
+  } = useAppContext();
   const [optionsShown, setOptionsShown] = useState(false);
 
   function toggleOptions() {
@@ -16,7 +23,7 @@ export default function BoardsDropdown({openAddBoard}) {
     setOptionsShown((prevState) => !prevState);
   }
   function handleSelectBoard(board) {
-    setBoardClicked(board)
+    setBoardClicked(board);
     // setOptionsShown((prevState) => !prevState);
   }
   useEffect(() => {
@@ -43,17 +50,12 @@ export default function BoardsDropdown({openAddBoard}) {
         <h4>ALL BOARDS {`(${boardsState.boards.length})`}</h4>
         {boardsState.boards.map((board) => {
           return (
-            <Link
-              to={`/boards/details/${board._id}`}
-              key={`${board._id}`}
-            >
+            <Link to={`boards/details/${board._id}`} key={`${board._id}`}>
               <button
                 onClick={() => handleSelectBoard(board)}
                 value={board.name}
                 className={
-                  boardClicked.name === board.name
-                    ? `selected`
-                    : `${theme}`
+                  boardClicked.name === board.name ? `selected` : `${theme}`
                 }
               >
                 {boardClicked.name === board.name ? (
@@ -69,8 +71,10 @@ export default function BoardsDropdown({openAddBoard}) {
             </Link>
           );
         })}
-        <button className={`add-board-btn ${theme}`}
-          onClick={handleCreateBoard}>
+        <button
+          className={`add-board-btn ${theme}`}
+          onClick={handleCreateBoard}
+        >
           <img src="/assets/icon-board-purple.svg" alt="board icon purple" />
           <h3>+ Create New Board</h3>
         </button>
