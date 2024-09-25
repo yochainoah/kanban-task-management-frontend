@@ -3,12 +3,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../AppContext";
 import "./EditBoardModal.css";
+import mongoose from "mongoose";
 // import dotenv from "dotenv";
 // dotenv.config();
 
 function EditBoardModal({ open, onClose }) {
-  const { theme, setBoardsState, boardClicked, setBoardClicked } =
-    useAppContext();
+  const { theme, boardClicked, setBoardClicked } = useAppContext();
   // console.log("board edited:", boardClicked);
   const handleCloseEditBoard = () => {
     onClose();
@@ -16,6 +16,7 @@ function EditBoardModal({ open, onClose }) {
   const [boardEdited, setBoardEdited] = useState(null);
   useEffect(() => {
     if (boardClicked) {
+      console.log("edit board use effect called");
       setBoardEdited({
         name: boardClicked.name,
         columns: boardClicked.columns ? [...boardClicked.columns] : [],
@@ -43,9 +44,21 @@ function EditBoardModal({ open, onClose }) {
     });
   }
   function handleAddColumn() {
+    console.log("handleAddColumn called");
+    console.log(boardEdited.columns);
+    if (boardEdited.columns.length >= 4) {
+      alert("You can only have up to 4 columns!");
+      return;
+    }
     setBoardEdited((prevState) => {
       const newBoard = { ...prevState };
-      newBoard.columns.push({ name: "", tasks: [] });
+      const newColumn = {
+        _id: new mongoose.Types.ObjectId(), // You can also use Date.now() or another method for unique ID
+        name: "",
+        tasks: [],
+      };
+
+      newBoard.columns = newBoard.columns.concat(newColumn); // Non-mutating update
       return newBoard;
     });
   }

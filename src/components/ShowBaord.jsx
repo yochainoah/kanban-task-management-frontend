@@ -46,9 +46,9 @@ const ShowBoard = ({ setShowEditBoard }) => {
     }
   }, [id, fetchBoard]);
 
-  const columnColors = ["purple", "green", "blue"];
+  const columnColors = ["purple", "green", "blue", "yellow"];
   return (
-    <div className="board">
+    <div className={`board`}>
       {boardClicked.columns && boardClicked.columns.length > 0 ? (
         <div className="board-content">
           <div className="column-headers">

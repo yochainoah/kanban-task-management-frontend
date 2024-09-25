@@ -1,20 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth} from "firebase/auth"
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+console.log("project id:", import.meta.env.FIREBASE_PROJECT_ID);
 const firebaseConfig = {
-  apiKey: "AIzaSyCYGZvXdmT8JFUW4qOiWqWaAjKmdT6D7O0",
-  authDomain: "kanban-auth-30167.firebaseapp.com",
-  projectId: "kanban-auth-30167",
-  storageBucket: "kanban-auth-30167.appspot.com",
-  messagingSenderId: "930064666679",
-  appId: "1:930064666679:web:301298357fbd2a532e6fb2",
-  measurementId: "G-L89SBP92R9"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APPID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENTID,
 };
 
 // Initialize Firebase

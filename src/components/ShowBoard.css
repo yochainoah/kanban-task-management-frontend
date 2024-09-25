@@ -37,6 +37,10 @@
   justify-content: center;
   align-items: center;
   flex: 0 0 280px;
+  cursor: pointer;
+}
+.add-column-btn:hover {
+  color: var(--main-purple);
 }
 .add-column-btn h1 {
   width: 100%;

@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useParams } from "react-router-dom";
 import BoardsDropdown from "./../components/BoardsDropdown";
 import { useState } from "react";
 import { useAppContext } from "./../AppContext";
+import { useAuth } from "../AuthProvider";
 import NewTaskModel from "./../components/models/NewTaskModel";
 import NewBoardModal from "./../components/models/NewBoardModal";
 import EditBoardModal from "./../components/models/EditBoardModal";
@@ -38,6 +39,7 @@ const Home = () => {
     showEditBoard,
     setShowEditBoard,
   } = useAppContext();
+  const { logout } = useAuth();
   const [showAddTask, setShowAddTask] = useState(false);
   const [showAddBoard, setShowAddBoard] = useState(false);
   const [showBtns, setShowBtns] = useState(false);
@@ -66,6 +68,7 @@ const Home = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        logout();
         navigate("/login");
         console.log("Signed out successfully");
       })
@@ -124,7 +127,7 @@ const Home = () => {
           </div>
         </div>
       </header>
-      <main className={showSidebar ? `` : `remove-sidebar-pd`}>
+      <main className={showSidebar ? `${theme}` : `remove-sidebar-pd ${theme}`}>
         <BoardsAside openAddBoard={() => setShowAddBoard(true)} />
         {!id && <ShowBoard setShowEditBoard={setShowEditBoard} />}
         {id && <Outlet />}

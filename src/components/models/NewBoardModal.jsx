@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useAppContext } from "../../AppContext";
+import mongoose from "mongoose";
 import "./NewBoardModal.css";
 // import dotenv from "dotenv";
 // dotenv.config();
@@ -58,7 +59,13 @@ function NewBoardModal({ open, onClose }) {
   function handleAddColumn() {
     setBoardAdded((prevState) => {
       const newBoard = { ...prevState };
-      newBoard.columns.push({ name: "", tasks: [] });
+      const newColumn = {
+        _id: new mongoose.Types.ObjectId(), // You can also use Date.now() or another method for unique ID
+        name: "",
+        tasks: [],
+      };
+
+      newBoard.columns = newBoard.columns.concat(newColumn); // Non-mutating update
       return newBoard;
     });
   }
