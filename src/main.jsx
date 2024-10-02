@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { AuthProvider } from "./AuthProvider.jsx";
 import { AppProvider } from "./AppContext";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import "./index.css";
 
+//  ....com/#/contact
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <HashRouter>
     <AuthProvider>
       <AppProvider>
         <React.StrictMode>
@@ -15,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </React.StrictMode>
       </AppProvider>
     </AuthProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
