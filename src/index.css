@@ -33,9 +33,16 @@ body {
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal overflow on the body */
 }
+body::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
 main {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+main::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
 }
 .overlay {
   position: absolute;

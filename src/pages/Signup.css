@@ -55,6 +55,14 @@
   margin-bottom: 32px;
 }
 .password-container {
+  position: relative;
   display: flex;
   flex-direction: column;
+}
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(30%);
+  cursor: pointer;
 }

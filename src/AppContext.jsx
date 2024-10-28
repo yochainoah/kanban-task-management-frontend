@@ -14,12 +14,14 @@ export const AppProvider = ({ children }) => {
     boards: [],
   });
 
+  console.log(`VITE_API_ROOT:`, import.meta.env.VITE_API_ROOT);
+
+  // https://vitejs.dev/guide/env-and-mode
   useEffect(() => {
     (async () => {
       const boardsData = await axios.get(
         `${import.meta.env.VITE_API_ROOT}/boards`
       );
-      console.log("boardsData", boardsData);
       setBoardsState({
         boards: boardsData.data,
         boardSelected: boardsData.data[0].name,

@@ -76,7 +76,6 @@ function NewBoardModal({ open, onClose }) {
       return;
     }
 
-    console.log("board added:", boardAdded);
     const res = await axios.post(
       `${import.meta.env.VITE_API_ROOT}/addBoard`,
       boardAdded

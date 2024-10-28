@@ -59,7 +59,6 @@ const NewTaskModel = ({ open, onClose }) => {
     setTaskAdded({ ...taskAdded, title: titleAdded });
   };
   const handleTaskDescription = (descriptionAdded) => {
-    console.log("descriptionAdded:", descriptionAdded);
     setTaskAdded({ ...taskAdded, description: descriptionAdded });
   };
   const handelStatusDropdown = () => {
@@ -134,7 +133,6 @@ const NewTaskModel = ({ open, onClose }) => {
       return;
     }
 
-    console.log("task-added:", taskAdded);
     taskAdded.boardId = boardClicked._id;
     const res = await fetch(`${import.meta.env.VITE_API_ROOT}/addTask`, {
       method: "POST",
@@ -143,7 +141,6 @@ const NewTaskModel = ({ open, onClose }) => {
       },
       body: JSON.stringify(taskAdded),
     });
-    console.log("response:", res);
     if (!res.ok) {
       const errorMessage = await res.text();
       // displayError("Something went wrong")
@@ -217,7 +214,9 @@ const NewTaskModel = ({ open, onClose }) => {
                       handleSubtaskChange(subtask.id, e.target.value)
                     }
                   />
-                  {warningIndicator && <span className="warning-text">Can't be empty</span>}
+                  {warningIndicator && (
+                    <span className="warning-text">Can't be empty</span>
+                  )}
                   <button onClick={() => handleRemoveSubtask(subtask.id)}>
                     {warningIndicator && (
                       <img

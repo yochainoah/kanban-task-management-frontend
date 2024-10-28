@@ -42,7 +42,8 @@ const TaskModel = ({ open, onClose, task }) => {
       const newColumn = newBoard.columns.find((c) => c.name === newStatus);
       const oldColumn = newBoard.columns.find((c) => c.name === task.status);
 
-      oldColumn.tasks.filter((t) => t._id !== task._id);
+      const oldTaskIndex = oldColumn.tasks.findIndex((t) => t._id == task._id);
+      oldColumn.tasks.splice(oldTaskIndex, 1);
       newColumn.tasks.push({ ...task, status: newStatus });
 
       return newBoard;
@@ -55,7 +56,6 @@ const TaskModel = ({ open, onClose, task }) => {
       description: task.description,
       boardId: boardClicked._id,
     };
-    console.log("boardState:", boardClicked);
     await axios.put(`${import.meta.env.VITE_API_ROOT}/tasks/${task._id}`, data);
 
     setFetchBoard(!fetchBoard);
@@ -71,7 +71,6 @@ const TaskModel = ({ open, onClose, task }) => {
       subtasks: updatedSubtasks,
       boardId: boardClicked._id,
     };
-    console.log(updatedTask);
     try {
       await axios.put(
         `${import.meta.env.VITE_API_ROOT}/tasks/${task._id}`,
@@ -80,7 +79,7 @@ const TaskModel = ({ open, onClose, task }) => {
       setFetchBoard(!fetchBoard);
       // setTaskClicked(updatedTask)
       setShowDropdown(false); // Close the dropdown
-      setShowModal(false);
+      // setShowModal(false);
     } catch (error) {
       console.error("Failed to update subtask completion:", error);
     }
@@ -90,6 +89,7 @@ const TaskModel = ({ open, onClose, task }) => {
     // setSelectedTask(task)
     // open edit task modal
     setEditModalOpen(true);
+    setShowBtns(false); // Close the buttons modal
     setShowModal(false);
   }
   function handleDeleteModalOpen() {

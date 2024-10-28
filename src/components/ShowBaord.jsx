@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import TaskModel from "./models/TaskModel";
-
 import { useAppContext } from "../AppContext";
 import "./ShowBoard.css";
-// import dotenv from "dotenv";
-// dotenv.config();
+import TasksColumn from "./TasksColumn";
+
 /*
     1. component mounts, JSX renders
     2. useEffect is called
 */
+
 const ShowBoard = ({ setShowEditBoard }) => {
   const {
     theme,
@@ -39,7 +39,7 @@ const ShowBoard = ({ setShowEditBoard }) => {
         const boardData = await axios.get(
           `${import.meta.env.VITE_API_ROOT}/boards/${id}`
         );
-        // console.log(boardData.data)
+        // console.log(boardData.data);
         setBoardClicked({ ...boardData.data });
       }
       fetchBoard();
@@ -67,31 +67,13 @@ const ShowBoard = ({ setShowEditBoard }) => {
           </div>
           <div className="columns-container">
             {boardClicked.columns &&
-              boardClicked.columns.map((column) => {
-                return (
-                  <div key={`${column._id}`} className="column-container">
-                    {column.tasks.map((task) => {
-                      const stCompleted = task.subtasks.filter(
-                        (st) => st.isCompleted === true
-                      );
-
-                      return (
-                        <button
-                          onClick={() => handleTaskClick(task)}
-                          key={task._id}
-                          className={`task ${theme}`}
-                        >
-                          <h3>{task.title}</h3>
-                          <p>
-                            {stCompleted.length} of {task.subtasks.length}{" "}
-                            subtasks
-                          </p>
-                        </button>
-                      );
-                    })}
-                  </div>
-                );
-              })}
+              boardClicked.columns.map((column) => (
+                <TasksColumn
+                  column={column}
+                  key={column._id}
+                  handleTaskClick={handleTaskClick}
+                />
+              ))}
             <button
               className={`add-column-btn ${theme}`}
               onClick={() => setShowEditBoard(true)}

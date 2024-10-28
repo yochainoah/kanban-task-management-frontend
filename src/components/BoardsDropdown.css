@@ -1,37 +1,62 @@
-.board-btn.dark{
+.board-btn.dark {
   color: var(--white);
   background-color: var(--dark-grey);
 }
-.board-btn.light{
+.board-btn.light {
   background-color: var(--white);
 }
-.board-options a{
+.board-options a {
   text-decoration: none;
 }
-.board-options button.selected {
+.board-options .dd-board-btn.selected {
   background-color: var(--main-purple);
   color: var(--white);
   width: 240px;
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
 }
-.board-options button.add-board-btn{
+.board-options button.add-board-btn {
   cursor: pointer;
   color: var(--main-purple);
 }
-.board-options button.add-board-btn.light{
+.board-options button.add-board-btn.light {
   color: var(--main-purple);
   background-color: var(--white);
 }
-.board-options button.add-board-btn.dark{
+.board-options button.add-board-btn.dark {
   color: var(--main-purple);
   background-color: var(--dark-grey);
 }
-.toggle-div{
+.board-options .dd-board-btn.light:hover {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 240px;
+  color: var(--main-purple);
+  background-color: rgb(99, 95, 199, 0.1);
+  cursor: pointer;
+}
+.board-options .dd-board-btn.dark:hover {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 240px;
+  color: var(--main-purple);
+  background-color: var(--white);
+  cursor: pointer;
+}
+.board-options .dd-board-btn.light:hover svg path {
+  fill: var(--main-purple);
+}
+.board-options .dd-board-btn.dark:hover svg path {
+  fill: var(--main-purple);
+}
+.board-options .dd-board-btn.selected svg path {
+  fill: var(--white);
+}
+.toggle-div {
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 .toggleContainer {
   width: 235px;
@@ -59,12 +84,12 @@
   height: 20px;
   border-radius: 25px;
   background-color: var(--main-purple);
-  transition: backround .3s;
+  transition: backround 0.3s;
   outline: none;
   cursor: pointer;
 }
 .toggleContainer input::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 25%;
@@ -73,7 +98,7 @@
   height: 14px;
   width: 14px;
   background-color: var(--white);
-  transition: left .3s;
+  transition: left 0.3s;
 }
 
 .toggleContainer input:checked {

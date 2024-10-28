@@ -11,7 +11,6 @@ function DeleteTaskModal({ open, onClose, taskDeleted }) {
   const handleCloseDeleteModal = () => {
     onClose();
   };
-  // console.log("task deleted:",taskDeleted)
   const handleDeleteTask = () => {
     axios.delete(`${import.meta.env.VITE_API_ROOT}/tasks`, {
       data: {

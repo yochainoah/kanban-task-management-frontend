@@ -6,6 +6,11 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  overflow: auto; /* Enables scrolling */
+  scrollbar-width: none; /* For Firefox */
+}
+.board::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
 }
 .board-content {
   height: 100%;
@@ -66,6 +71,8 @@
   flex-direction: column;
   gap: 20px;
 }
+
+
 .column-headers .column-heading {
   display: flex;
   width: 280px;
@@ -83,6 +90,15 @@
   border: none;
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.114);
+  cursor: move;
+}
+.task.dragging {
+  position: absolute;
+  z-index: 1000;
+  /* pointer-events: none;
+  user-select: none; */
+  display: inline-block;
+  width: unset;
 }
 .task.dark {
   background-color: var(--dark-grey);

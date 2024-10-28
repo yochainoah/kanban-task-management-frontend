@@ -27,7 +27,6 @@ function EditTaskModal({ open, onClose }) {
     statusError: "",
     subtasksError: "",
   });
-  console.log("taskEdited:", taskEdited);
   const handleCloseEditTask = () => {
     // setShowDropdown(false); // Close the dropdown
     setValidationErrors({
@@ -41,7 +40,6 @@ function EditTaskModal({ open, onClose }) {
     setTaskEdited({ ...taskEdited, title: titleAdded });
   };
   const handleTaskDescription = (descriptionAdded) => {
-    console.log("descriptionAdded:", descriptionAdded);
     setTaskEdited({ ...taskEdited, description: descriptionAdded });
   };
   const handelStatusDropdown = () => {

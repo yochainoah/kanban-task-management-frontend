@@ -9,14 +9,12 @@ import mongoose from "mongoose";
 
 function EditBoardModal({ open, onClose }) {
   const { theme, boardClicked, setBoardClicked } = useAppContext();
-  // console.log("board edited:", boardClicked);
   const handleCloseEditBoard = () => {
     onClose();
   };
   const [boardEdited, setBoardEdited] = useState(null);
   useEffect(() => {
     if (boardClicked) {
-      console.log("edit board use effect called");
       setBoardEdited({
         name: boardClicked.name,
         columns: boardClicked.columns ? [...boardClicked.columns] : [],
@@ -44,8 +42,6 @@ function EditBoardModal({ open, onClose }) {
     });
   }
   function handleAddColumn() {
-    console.log("handleAddColumn called");
-    console.log(boardEdited.columns);
     if (boardEdited.columns.length >= 4) {
       alert("You can only have up to 4 columns!");
       return;
@@ -63,7 +59,6 @@ function EditBoardModal({ open, onClose }) {
     });
   }
   async function handleEditBoardSubmit() {
-    console.log("board edited:", boardEdited);
     const res = await axios.put(
       `${import.meta.env.VITE_API_ROOT}/boards/${boardClicked._id}`,
       boardEdited

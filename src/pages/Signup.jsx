@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing icons for showing password
 import "./Signup.css";
 
 const Signup = () => {
@@ -9,6 +10,7 @@ const Signup = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,6 @@ const Signup = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         navigate("/login");
         // ...
       })
@@ -48,14 +49,22 @@ const Signup = () => {
         <div className="password-container">
           <label htmlFor="password">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // Toggle password visibility
             label="Create password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             placeholder="Password"
           />
+          <span
+            className="password-toggle-icon"
+            onClick={() => setShowPassword(!showPassword)} // Toggle showPassword state
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}{" "}
+            {/* Eye icon for toggling */}
+          </span>
         </div>
+
         <p>
           Already have an account? <NavLink to="/login">Sign in</NavLink>
         </p>
